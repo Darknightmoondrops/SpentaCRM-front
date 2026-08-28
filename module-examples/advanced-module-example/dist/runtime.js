@@ -1,0 +1,1 @@
+document.querySelectorAll('[data-action="demo"]').forEach(btn=>btn.addEventListener('click',()=>{const target=document.querySelector('[data-demo-status]');if(target) target.textContent='Demo action completed at '+new Date().toLocaleTimeString();}));

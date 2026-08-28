@@ -2,11 +2,11 @@ import { defineExtension } from "../sdk";
 
 export const graphiteThemeExtension = defineExtension({
   manifest: {
-    apiVersion: 2, id: "b2bcrm.graphite-theme", name: "Graphite", version: "1.0.0", publisher: "B2B CRM",
+    apiVersion: 3, id: "spentacrm.graphite-theme", name: "Graphite", version: "1.0.0", publisher: "SpentaCRM",
     description: "A low-saturation professional theme for dense workspaces.", categories: ["theme"], permissions: ["ui:theme"], builtIn: true,
   },
   contributes: { themes: [{
-    id: "b2bcrm.graphite", label: "Graphite", description: "Soft graphite surfaces with a teal accent.", appearance: "light",
+    id: "spentacrm.graphite", label: "Graphite", description: "Soft graphite surfaces with a teal accent.", appearance: "light",
     tokens: {
       "--ink": "#18201f", "--ink-soft": "#2d3937", "--paper": "#f3f5f4", "--surface": "#ffffff", "--surface-2": "#e9eeec",
       "--surface-raised": "#ffffff", "--line": "#dbe2df", "--line-strong": "#becbc6", "--muted": "#64706d", "--accent": "#147d73",

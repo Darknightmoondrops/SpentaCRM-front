@@ -40,7 +40,8 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
     });
     const modules = (extension.contributes?.modules || []).flatMap(item => item.navigation ? [{ href: `/extension-modules/${encodeURIComponent(extension.manifest.id)}/${encodeURIComponent(item.id)}`, label: item.navigation.label, icon: ExtensionIcon, extensionId: extension.manifest.id, extensionSection: item.navigation.section || "extensions" }] : []);
     const remoteModules = (extension.contributes?.remoteModules || []).flatMap(item => item.navigation ? [{ href: `/extension-modules/${encodeURIComponent(extension.manifest.id)}/${encodeURIComponent(item.id)}`, label: item.navigation.label, icon: ExtensionIcon, extensionId: extension.manifest.id, extensionSection: item.navigation.section || "extensions" }] : []);
-    return [...sidebar, ...modules, ...remoteModules] as NavItem[];
+    const runtimePages = (extension.contributes?.runtimePages || []).flatMap(item => item.navigation ? [{ href: `/extension-pages/${encodeURIComponent(extension.manifest.id)}/${encodeURIComponent(item.id)}`, label: item.navigation.label, icon: ExtensionIcon, extensionId: extension.manifest.id, extensionSection: item.navigation.section || "extensions" }] : []);
+    return [...sidebar, ...modules, ...remoteModules, ...runtimePages] as NavItem[];
   });
   const groupKey: Record<string, NavItem["extensionSection"]> = { Overview: "overview", Relationships: "relationships", Delivery: "delivery", Workspace: "workspace" };
   const coreGroups = groups.map((group) => ({

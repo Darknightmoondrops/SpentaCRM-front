@@ -149,11 +149,19 @@ SpentaCRM intentionally keeps project management lightweight. It is designed to 
 
 ---
 
+## Portable Module ZIPs
+
+SpentaCRM can install optional company capabilities from ZIP packages at runtime. Each ZIP contains a validated `spenta-module.json` manifest and declares one of four complexity levels: **simple**, **medium**, **advanced**, or **professional**. Installed modules appear in the **Modules & Extensions** catalogue and can be enabled or disabled per workspace.
+
+A module ZIP is a small project package: `spenta-module.json` is only the manifest, while browser-ready HTML/CSS/JS under `dist/` implements the actual page, dashboard widget or entity tab. Package files are persisted in IndexedDB and rendered in sandboxed iframes, so portable modules can be installed without rebuilding Next.js and without executing uploaded code in the parent CRM origin. Trusted React/TypeScript extensions continue to use the compile-time registry. See [`MODULES.md`](./MODULES.md).
+
+---
+
 ## Extension platform
 
 One of SpentaCRM's core goals is to make the CRM extensible instead of forcing every customization into the core codebase.
 
-The current **Extension API v2** supports several contribution models.
+The current **Extension API v3** supports several contribution models.
 
 ### Portable runtime extensions
 
@@ -175,7 +183,7 @@ Supported contribution points currently include:
 - command-palette actions;
 - sandboxed remote modules.
 
-Additional entity-level settings, tabs, and actions are reserved in the SDK for future host surfaces.
+Portable API v3 modules can also mount sandboxed pages, dashboard widgets and entity tabs. Entity host surfaces are currently wired for Company, Contact, Deal and Project records.
 
 See [EXTENSIONS.md](./EXTENSIONS.md) and [extension-examples](./extension-examples/) for the extension model and examples.
 
@@ -263,7 +271,7 @@ See [API-CONTRACTS.md](./API-CONTRACTS.md) for backend DTOs, permission keys, an
 | Routing | Next.js App Router |
 | Rendering | Server Components + Client Components where needed |
 | Async UI | Suspense, streaming, loading/error boundaries |
-| Extension SDK | `@b2b-crm/extension-sdk` |
+| Extension SDK | `@spentacrm/extension-sdk` |
 | Linting | ESLint 9 |
 | Runtime | Node.js 20.9+ |
 | Planned backend | NestJS |
@@ -377,7 +385,7 @@ The application identity and workspace defaults can be configured using `.env.lo
 NEXT_PUBLIC_APP_NAME=SpentaCRM
 NEXT_PUBLIC_APP_SHORT_NAME=Spenta
 NEXT_PUBLIC_APP_TAGLINE=Relationships, pipeline & delivery
-NEXT_PUBLIC_APP_VERSION=v0.11
+NEXT_PUBLIC_APP_VERSION=v0.13
 NEXT_PUBLIC_WORKSPACE_NAME=Demo Workspace
 NEXT_PUBLIC_WORKSPACE_PLAN=Business
 NEXT_PUBLIC_LOCALE=en-GB
@@ -461,7 +469,7 @@ Completed areas include:
 - projects;
 - tasks and activities;
 - public / white-label productization;
-- Extension API v2 and Theme Studio;
+- Extension API v3 and Theme Studio;
 - operational dashboard;
 - authentication, workspace settings, RBAC, and audit log.
 
@@ -556,7 +564,8 @@ Before larger architectural changes, opening an issue or discussion first is rec
 | --- | --- |
 | [FRONTEND-ROADMAP.md](./FRONTEND-ROADMAP.md) | Product implementation phases and current status |
 | [API-CONTRACTS.md](./API-CONTRACTS.md) | Planned NestJS API contracts, DTOs, permissions, and invariants |
-| [EXTENSIONS.md](./EXTENSIONS.md) | Extension API v2, installation models, themes, remote modules, and security |
+| [EXTENSIONS.md](./EXTENSIONS.md) | Extension API v3, installation models, themes, remote modules, and security |
+| [MODULES.md](./MODULES.md) | Portable ZIP module format, complexity levels, limits, and security model |
 | [OPTIMIZATION.md](./OPTIMIZATION.md) | Next.js performance and rendering architecture |
 | [PUBLIC-PRODUCT.md](./PUBLIC-PRODUCT.md) | B2B productization and white-label decisions |
 | [DESIGN-NOTES.md](./DESIGN-NOTES.md) | Product visual system and design direction |
@@ -712,11 +721,19 @@ SpentaCRM تلاش می‌کند این کار تکراری را کاهش دهد
 
 ---
 
+## ماژول‌های ZIP قابل نصب
+
+SpentaCRM می‌تواند قابلیت‌های اختیاری هر شرکت را به‌صورت فایل ZIP دریافت و در بخش **Modules & Extensions** ثبت کند. هر پکیج دارای فایل `spenta-module.json` است و یکی از چهار سطح **simple**، **medium**، **advanced** یا **professional** را مشخص می‌کند. ماژول نصب‌شده را می‌توان برای هر Workspace فعال یا غیرفعال کرد.
+
+فایل ZIP یک پروژه کوچک ماژول است: `spenta-module.json` فقط Manifest آن است و فایل‌های آماده مرورگر در `dist/` صفحه، Widget یا Tab واقعی را پیاده‌سازی می‌کنند. فایل‌های پکیج در IndexedDB ذخیره و داخل iframe sandbox اجرا می‌شوند؛ بنابراین ماژول Portable بدون Build مجدد Next.js نصب می‌شود و کد آپلودشده نیز در Origin اصلی CRM اجرا نمی‌شود. Extensionهای React/TypeScript دارای دسترسی مستقیم به Core همچنان به‌صورت Trusted و در زمان Build ثبت می‌شوند. جزئیات در [`MODULES.md`](./MODULES.md) آمده است.
+
+---
+
 ## سیستم Extension
 
 یکی از اهداف اصلی SpentaCRM این است که برای هر قابلیت جدید مجبور به تغییر Core پروژه نباشیم.
 
-در حال حاضر **Extension API v2** چند مدل توسعه را پشتیبانی می‌کند.
+در حال حاضر **Extension API v3** چند مدل توسعه را پشتیبانی می‌کند.
 
 ### Portable Runtime Extensions
 
@@ -824,7 +841,7 @@ Frontend در حال حاضر Boundaryهای لازم را برای Endpointها
 | Routing | Next.js App Router |
 | Rendering | Server Components + Client Components |
 | Async UI | Suspense، Streaming، Loading/Error Boundaries |
-| Extension SDK | `@b2b-crm/extension-sdk` |
+| Extension SDK | `@spentacrm/extension-sdk` |
 | Linting | ESLint 9 |
 | Runtime | Node.js 20.9+ |
 | Backend هدف | NestJS |
@@ -932,7 +949,7 @@ NEXT_PUBLIC_API_URL=https://api.example.com/api/v1
 NEXT_PUBLIC_APP_NAME=SpentaCRM
 NEXT_PUBLIC_APP_SHORT_NAME=Spenta
 NEXT_PUBLIC_APP_TAGLINE=Relationships, pipeline & delivery
-NEXT_PUBLIC_APP_VERSION=v0.11
+NEXT_PUBLIC_APP_VERSION=v0.13
 NEXT_PUBLIC_WORKSPACE_NAME=Demo Workspace
 NEXT_PUBLIC_WORKSPACE_PLAN=Business
 NEXT_PUBLIC_LOCALE=fa-IR
@@ -1016,7 +1033,7 @@ Roadmap فعلی Frontend تا بخش‌های اصلی **Phase 08** تکمیل 
 - Projects؛
 - Tasks و Activities؛
 - Public / White-label Productization؛
-- Extension API v2 و Theme Studio؛
+- Extension API v3 و Theme Studio؛
 - Operational Dashboard؛
 - Authentication، Workspace Settings، RBAC و Audit Log.
 
@@ -1111,7 +1128,8 @@ git push origin feature/my-feature
 | --- | --- |
 | [FRONTEND-ROADMAP.md](./FRONTEND-ROADMAP.md) | فازهای توسعه و وضعیت فعلی Frontend |
 | [API-CONTRACTS.md](./API-CONTRACTS.md) | قراردادهای Backend، DTOها، Permissionها و Invariantها |
-| [EXTENSIONS.md](./EXTENSIONS.md) | Extension API v2، مدل نصب، Theme، Remote Module و Security |
+| [EXTENSIONS.md](./EXTENSIONS.md) | Extension API v3، مدل نصب، Theme، Remote Module و Security |
+| [MODULES.md](./MODULES.md) | فرمت ماژول ZIP، سطح‌بندی، محدودیت‌ها و مدل امنیتی |
 | [OPTIMIZATION.md](./OPTIMIZATION.md) | معماری Performance و Rendering در Next.js |
 | [PUBLIC-PRODUCT.md](./PUBLIC-PRODUCT.md) | تصمیمات مربوط به B2B Productization و White-label |
 | [DESIGN-NOTES.md](./DESIGN-NOTES.md) | Design System و جهت بصری محصول |

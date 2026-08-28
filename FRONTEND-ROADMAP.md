@@ -96,7 +96,7 @@ The frontend is intentionally being completed before the NestJS backend. Each ph
 - Made locale, currency and timezone presentation configurable.
 
 ## Phase 06.6 — Extension platform — DONE
-- Added Extension API v2 with Theme Studio, portable runtime modules, sandboxing, commands, module/page/widget contributions, custom themes and advanced visual effects.
+- Added Extension API v3 with Theme Studio, project-ZIP runtime modules, IndexedDB package storage, sandboxing, commands, page/widget/entity-tab contributions, custom themes and advanced visual effects.
 - Added workspace-level `ExtensionProvider` with enable/disable state and active-theme selection.
 - Added runtime-safe portable Theme Extensions installable from JSON without executing uploaded JavaScript.
 - Added token whitelist/sanitisation for portable theme packages.

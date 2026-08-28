@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const configPath = path.join(root, "crm.extensions.json");
+const configPath = path.join(root, "spenta.extensions.json");
 const outputPath = path.join(root, "src/extensions/generated-registry.ts");
 const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 const modules = Array.isArray(config.extensions) ? [...new Set(config.extensions.filter(value => typeof value === "string" && value.trim()))] : [];

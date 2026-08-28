@@ -3,9 +3,9 @@ import { SYSTEM_ROLES } from "@/auth/permissions";
 import { workspaceUsers } from "./mock-data";
 import type { PermissionKey, WorkspaceRole, WorkspaceSettings, WorkspaceUser } from "./types";
 
-const SETTINGS_KEY = "b2b-crm:workspace-settings:v1";
-const MEMBERS_KEY = "b2b-crm:workspace-members:v1";
-const ROLES_KEY = "b2b-crm:workspace-roles:v1";
+const SETTINGS_KEY = "spentacrm:workspace-settings:v1";
+const MEMBERS_KEY = "spentacrm:workspace-members:v1";
+const ROLES_KEY = "spentacrm:workspace-roles:v1";
 
 export const defaultWorkspaceSettings: WorkspaceSettings = {
   name: productConfig.workspaceName,
@@ -26,7 +26,7 @@ function read<T>(key: string, fallback: T): T {
 
 function write<T>(key: string, value: T) {
   window.localStorage.setItem(key, JSON.stringify(value));
-  window.dispatchEvent(new CustomEvent("b2b-crm:workspace-store", { detail: { key } }));
+  window.dispatchEvent(new CustomEvent("spentacrm:workspace-store", { detail: { key } }));
 }
 
 export function getWorkspaceSettings() { return read(SETTINGS_KEY, defaultWorkspaceSettings); }

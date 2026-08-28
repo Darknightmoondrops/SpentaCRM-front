@@ -8,7 +8,7 @@ importers:
 
   .:
     dependencies:
-      '@b2b-crm/extension-sdk':
+      '@spentacrm/extension-sdk':
         specifier: file:packages/extension-sdk
         version: file:packages/extension-sdk(react@19.2.8)
       next:
@@ -45,7 +45,7 @@ importers:
 
 packages:
 
-  '@b2b-crm/extension-sdk@file:packages/extension-sdk':
+  '@spentacrm/extension-sdk@file:packages/extension-sdk':
     resolution: {directory: packages/extension-sdk, type: directory}
     peerDependencies:
       react: '>=19'
@@ -1823,7 +1823,7 @@ packages:
 
 snapshots:
 
-  '@b2b-crm/extension-sdk@file:packages/extension-sdk(react@19.2.8)':
+  '@spentacrm/extension-sdk@file:packages/extension-sdk(react@19.2.8)':
     dependencies:
       react: 19.2.8
 

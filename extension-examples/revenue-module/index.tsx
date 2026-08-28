@@ -1,4 +1,4 @@
-import { defineExtension } from "@b2b-crm/extension-sdk";
+import { defineExtension } from "@spentacrm/extension-sdk";
 
 function RevenueModule() {
   return <section className="panel"><div className="eyebrow">EXTENSION MODULE</div><h2>Revenue intelligence</h2><p>This React module is owned by a trusted extension package.</p></section>;
@@ -6,7 +6,7 @@ function RevenueModule() {
 
 export default defineExtension({
   manifest: {
-    apiVersion: 2,
+    apiVersion: 3,
     id: "example.revenue-intelligence",
     name: "Revenue Intelligence",
     version: "1.0.0",

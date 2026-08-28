@@ -2,16 +2,16 @@ import { defineExtension } from "../sdk";
 
 export const arcaneThemeExtension = defineExtension({
   manifest: {
-    apiVersion: 2,
-    id: "b2bcrm.arcane-theme",
+    apiVersion: 3,
+    id: "spentacrm.arcane-theme",
     name: "Arcane Violet",
     version: "2.0.0",
-    publisher: "B2B CRM",
+    publisher: "SpentaCRM",
     description: "Fantasy-inspired violet glass theme with starfield motion.",
     categories: ["theme"], permissions: ["ui:theme"], builtIn: true,
   },
   contributes: { themes: [{
-    id: "b2bcrm.arcane-violet", label: "Arcane Violet", description: "Purple-blue glass surfaces with a subtle animated starfield.", appearance: "dark",
+    id: "spentacrm.arcane-violet", label: "Arcane Violet", description: "Purple-blue glass surfaces with a subtle animated starfield.", appearance: "dark",
     tokens: {
       "--ink":"#f5f0ff","--ink-soft":"#d9ccf5","--paper":"#0c0817","--surface":"#17102a","--surface-2":"#21183a","--surface-raised":"#1c1332",
       "--line":"#392b59","--line-strong":"#5a4480","--muted":"#a99bc7","--accent":"#a78bfa","--accent-soft":"#34265a","--blue":"#17284e",

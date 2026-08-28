@@ -8,6 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ActivityIcon, CompanyIcon, ContactIcon, DealIcon, TaskIcon } from "@/components/icons";
 import { Badge, SectionTitle } from "@/components/ui";
 import { ConfirmDialog, Modal, Toast } from "@/components/overlay";
+import { EntityExtensionPoints } from "@/components/extensions/entity-extension-points";
 import { currency } from "@/lib/format";
 import type { ContactPayload } from "@/lib/contact-api";
 import { hydrateMockCompanies } from "@/lib/mock-company-store";
@@ -212,6 +213,8 @@ export function ContactDetailView({
       {tab === "deals" && <section className="panel tab-panel"><SectionTitle eyebrow="Commercial" title="Deals where this is the primary contact" />{deals.length ? <div className="deal-list">{deals.map((deal) => <div className="deal-row deal-row-wide" key={deal.id}><div className="deal-icon"><DealIcon /></div><div><strong>{deal.title}</strong><span>{deal.owner} · {deal.probability}% probability · close {deal.closeDate}</span></div><Badge tone={dealTone(deal.stage)}>{deal.stage}</Badge><strong className="mono">{currency(deal.value)}</strong><span /></div>)}</div> : <div className="data-empty"><strong>No linked deals.</strong><p>Set this stakeholder as a deal's primary contact to create a direct commercial relationship.</p></div>}</section>}
 
       {tab === "tasks" && <section className="panel tab-panel"><SectionTitle eyebrow="Follow-up" title="Contact tasks" action={{ label: "New task", href: `/tasks?new=1&relationType=CONTACT&relationId=${contact.id}` as Route }} />{liveTasks.length ? <div className="contact-task-list">{liveTasks.map((task) => <div className="contact-task" key={task.id}><div className="compact-icon"><TaskIcon /></div><div><strong>{task.title}</strong><span>{task.assignee} · due {task.due}</span></div><Badge tone={taskTone(task.priority)}>{task.priority}</Badge><Badge tone={task.status === "DONE" ? "green" : "neutral"}>{task.status.replace("_", " ")}</Badge></div>)}</div> : <div className="data-empty"><strong>No contact tasks.</strong><p>Follow-up work linked directly to this stakeholder will appear here.</p></div>}</section>}
+
+      <EntityExtensionPoints entityType="contact" entityId={contact.id} />
 
       <Modal open={editing} onClose={() => setEditing(false)} eyebrow="CRM / Contact" title={`Edit ${contact.name}`} size="lg" footer={<><button className="secondary-button" type="button" onClick={() => setEditing(false)}>Cancel</button><button className="primary-button" type="submit" form="contact-form">Save changes</button></>}>
         <ContactForm key={contact.updatedAt} contact={contact} companies={companies} onSubmit={save} />

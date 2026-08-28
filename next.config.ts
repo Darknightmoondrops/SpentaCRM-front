@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   typedRoutes: true,
   poweredByHeader: false,
-  transpilePackages: ["@b2b-crm/extension-sdk"],
+  transpilePackages: ["@spentacrm/extension-sdk"],
 };
 
 export default nextConfig;

@@ -8,21 +8,25 @@ import {
   type ExtensionDefinition,
   type PortableExtensionPackage,
   type RemoteModuleContribution,
+  type RuntimeDashboardWidgetContribution,
+  type RuntimeEntityActionContribution,
+  type RuntimeEntityTabContribution,
+  type RuntimePageContribution,
   type ThemeContribution,
   type ThemeVisualProfile,
 } from "./sdk";
+import type { SpentaModuleArchive } from "./zip-package";
+import { removeRuntimePackage, saveRuntimePackage } from "./module-store";
 
-const STATE_KEY = "b2b-crm.extensions.state.v2";
-const LEGACY_STATE_KEY = "b2b-crm.extensions.state.v1";
-const PACKAGES_KEY = "b2b-crm.extensions.portable-packages.v2";
-const LEGACY_PACKAGES_KEY = "b2b-crm.extensions.theme-packages.v1";
-const DEFAULT_THEME = "b2bcrm.clean";
-const CORE_EXTENSION = "b2bcrm.core-theme";
+const STATE_KEY = "spentacrm.extensions.state.v3";
+const PACKAGES_KEY = "spentacrm.extensions.portable-packages.v3";
+const DEFAULT_THEME = "spentacrm.clean";
+const CORE_EXTENSION = "spentacrm.core-theme";
 
 type ExtensionState = { enabledIds: string[]; activeThemeId: string };
-const DEFAULT_ENABLED_IDS = extensionRegistry.filter(x => x.manifest.id !== "b2bcrm.account-health-sample").map(x => x.manifest.id);
+const DEFAULT_ENABLED_IDS = extensionRegistry.filter(x => x.manifest.id !== "spentacrm.account-health-sample").map(x => x.manifest.id);
 const DEFAULT_STATE: ExtensionState = { enabledIds: DEFAULT_ENABLED_IDS, activeThemeId: DEFAULT_THEME };
-export type InstalledExtension = ExtensionDefinition & { source: "built-in" | "package" | "imported" | "custom" };
+export type InstalledExtension = ExtensionDefinition & { source: "built-in" | "package" | "imported" | "module-zip" | "custom" };
 export type InstalledTheme = ThemeContribution & { extensionId: string; enabled: boolean; source: InstalledExtension["source"] };
 export type InstalledRemoteModule = RemoteModuleContribution & { extensionId: string; enabled: boolean; extensionName: string };
 
@@ -36,6 +40,7 @@ type ExtensionContextValue = {
   setExtensionEnabled: (extensionId: string, enabled: boolean) => void;
   setActiveTheme: (themeId: string) => void;
   installPortablePackage: (raw: string) => { ok: true; extensionId: string } | { ok: false; error: string };
+  installModuleArchive: (archive: SpentaModuleArchive) => Promise<{ ok: true; extensionId: string } | { ok: false; error: string }>;
   installThemePackage: (raw: string) => { ok: true; extensionId: string } | { ok: false; error: string };
   upsertCustomTheme: (theme: ThemeContribution, extensionId?: string) => { extensionId: string; themeId: string };
   exportThemePackage: (themeId: string) => string | null;
@@ -46,7 +51,7 @@ const ExtensionContext = createContext<ExtensionContextValue | null>(null);
 
 function loadState(): ExtensionState {
   try {
-    const raw = localStorage.getItem(STATE_KEY) || localStorage.getItem(LEGACY_STATE_KEY);
+    const raw = localStorage.getItem(STATE_KEY) || localStorage.getItem("spentacrm.extensions.state.v2");
     const value = JSON.parse(raw || "null") as ExtensionState | null;
     if (value?.enabledIds && value.activeThemeId) return value;
   } catch {}
@@ -59,7 +64,7 @@ function normalizePortablePackage(value: PortableExtensionPackage): PortableExte
 
 function loadImportedPackages(): PortableExtensionPackage[] {
   try {
-    const raw = localStorage.getItem(PACKAGES_KEY) || localStorage.getItem(LEGACY_PACKAGES_KEY) || "[]";
+    const raw = localStorage.getItem(PACKAGES_KEY) || localStorage.getItem("spentacrm.extensions.portable-packages.v2") || "[]";
     const value = JSON.parse(raw);
     if (!Array.isArray(value)) return [];
     return value.map(item => validatePortablePackage(item)).filter(Boolean).map(item => normalizePortablePackage(item!));
@@ -69,8 +74,51 @@ function loadImportedPackages(): PortableExtensionPackage[] {
 function toDefinition(pkg: PortableExtensionPackage): ExtensionDefinition {
   return {
     manifest: { ...pkg.manifest, apiVersion: EXTENSION_API_VERSION, builtIn: false },
-    contributes: { themes: pkg.contributes.themes || [], remoteModules: pkg.contributes.remoteModules || [] },
+    contributes: {
+      themes: pkg.contributes.themes || [],
+      remoteModules: pkg.contributes.remoteModules || [],
+      runtimePages: pkg.contributes.runtimePages || [],
+      runtimeDashboardWidgets: pkg.contributes.runtimeDashboardWidgets || [],
+      runtimeEntityTabs: pkg.contributes.runtimeEntityTabs || [],
+      runtimeEntityActions: pkg.contributes.runtimeEntityActions || [],
+    },
   };
+}
+
+function hasRuntimeFiles(pkg: PortableExtensionPackage) {
+  const c = pkg.contributes;
+  return Boolean(c.runtimePages?.length || c.runtimeDashboardWidgets?.length || c.runtimeEntityTabs?.length);
+}
+
+function runtimeEntries(pkg: PortableExtensionPackage) {
+  return [
+    ...(pkg.contributes.runtimePages || []).map(item => item.entry),
+    ...(pkg.contributes.runtimeDashboardWidgets || []).map(item => item.entry),
+    ...(pkg.contributes.runtimeEntityTabs || []).map(item => item.entry),
+  ];
+}
+
+function safeArchivePath(value: unknown) {
+  return typeof value === "string" && value.length > 0 && value.length <= 260 && !value.startsWith("/") && !value.includes("../") && !value.includes("..\\") && !value.includes("\\");
+}
+
+function validateRuntimePage(page: RuntimePageContribution) {
+  return !!page && typeof page.id === "string" && /^[a-z0-9][a-z0-9._-]{1,100}$/i.test(page.id) && typeof page.title === "string" && page.title.length <= 100 && safeArchivePath(page.entry) && (!page.navigation || (typeof page.navigation.label === "string" && page.navigation.label.length <= 60));
+}
+
+function validateRuntimeWidget(widget: RuntimeDashboardWidgetContribution) {
+  return !!widget && typeof widget.id === "string" && /^[a-z0-9][a-z0-9._-]{1,100}$/i.test(widget.id) && typeof widget.title === "string" && widget.title.length <= 100 && ["dashboard.afterStats","dashboard.afterPipeline","dashboard.afterActivity","dashboard.afterAccounts"].includes(widget.zone) && safeArchivePath(widget.entry) && (widget.height === undefined || (typeof widget.height === "number" && widget.height >= 120 && widget.height <= 1200));
+}
+
+function validateRuntimeEntityTab(tab: RuntimeEntityTabContribution) {
+  return !!tab && typeof tab.id === "string" && /^[a-z0-9][a-z0-9._-]{1,100}$/i.test(tab.id) && ["company","contact","deal","project","task"].includes(tab.entity) && typeof tab.label === "string" && tab.label.length <= 60 && safeArchivePath(tab.entry) && (tab.height === undefined || (typeof tab.height === "number" && tab.height >= 120 && tab.height <= 1600));
+}
+
+function validateRuntimeEntityAction(action: RuntimeEntityActionContribution) {
+  if (!action || typeof action.id !== "string" || !/^[a-z0-9][a-z0-9._-]{1,100}$/i.test(action.id) || !["company","contact","deal","project","task"].includes(action.entity) || typeof action.label !== "string" || action.label.length > 60 || !action.action) return false;
+  if (action.action.type === "open-page") return typeof action.action.pageId === "string" && action.action.pageId.length <= 100;
+  if (action.action.type === "open-url") return typeof action.action.url === "string" && isSafeHttpUrl(action.action.url);
+  return false;
 }
 
 function safeNumber(value: unknown, min: number, max: number) {
@@ -130,19 +178,32 @@ function validateRemoteModule(module: RemoteModuleContribution) {
 function validatePortablePackage(value: unknown): PortableExtensionPackage | null {
   if (!value || typeof value !== "object") return null;
   const candidate = value as PortableExtensionPackage;
-  if (![1, EXTENSION_API_VERSION].includes(candidate.apiVersion)) return null;
+  if (![1, 2, EXTENSION_API_VERSION].includes(candidate.apiVersion)) return null;
   const manifest = candidate.manifest;
   if (!manifest || typeof manifest.id !== "string" || !/^[a-z0-9][a-z0-9._-]{2,80}$/i.test(manifest.id) || typeof manifest.name !== "string" || typeof manifest.version !== "string" || typeof manifest.publisher !== "string" || typeof manifest.description !== "string") return null;
   if (!Array.isArray(manifest.categories) || !candidate.contributes || typeof candidate.contributes !== "object") return null;
   const allowedCategories = new Set(["theme","module","productivity","analytics","integration","automation","data","developer"]);
-  const allowedPermissions = new Set(["ui:theme","ui:dashboard","ui:navigation","ui:commands","ui:settings","ui:entity-tabs","ui:entity-actions","remote:frame","crm:companies:read","crm:companies:write","crm:contacts:read","crm:contacts:write","crm:deals:read","crm:deals:write","crm:projects:read","crm:projects:write","crm:tasks:read","crm:tasks:write","crm:activities:read","crm:activities:write"]);
+  const allowedComplexities = new Set(["simple","medium","advanced","professional"]);
+  const allowedPermissions = new Set(["ui:theme","ui:dashboard","ui:navigation","ui:commands","ui:settings","ui:entity-tabs","ui:entity-actions","remote:frame","runtime:sandbox","crm:companies:read","crm:companies:write","crm:contacts:read","crm:contacts:write","crm:deals:read","crm:deals:write","crm:projects:read","crm:projects:write","crm:tasks:read","crm:tasks:write","crm:activities:read","crm:activities:write"]);
   if (!manifest.categories.every(category => allowedCategories.has(category)) || (manifest.permissions && (!Array.isArray(manifest.permissions) || !manifest.permissions.every(permission => allowedPermissions.has(permission))))) return null;
+  if (manifest.complexity !== undefined && !allowedComplexities.has(manifest.complexity)) return null;
   const themes = candidate.contributes.themes || [];
   const remoteModules = candidate.contributes.remoteModules || [];
-  if (!Array.isArray(themes) || !Array.isArray(remoteModules) || (!themes.length && !remoteModules.length)) return null;
-  if (!themes.every(validateTheme) || !remoteModules.every(validateRemoteModule)) return null;
-  if (themes.length && !(manifest.permissions || []).includes("ui:theme")) return null;
-  if (remoteModules.length && !(manifest.permissions || []).includes("remote:frame")) return null;
+  const runtimePages = candidate.contributes.runtimePages || [];
+  const runtimeDashboardWidgets = candidate.contributes.runtimeDashboardWidgets || [];
+  const runtimeEntityTabs = candidate.contributes.runtimeEntityTabs || [];
+  const runtimeEntityActions = candidate.contributes.runtimeEntityActions || [];
+  if (![themes, remoteModules, runtimePages, runtimeDashboardWidgets, runtimeEntityTabs, runtimeEntityActions].every(Array.isArray)) return null;
+  if (![themes, remoteModules, runtimePages, runtimeDashboardWidgets, runtimeEntityTabs, runtimeEntityActions].some(items => items.length)) return null;
+  if (!themes.every(validateTheme) || !remoteModules.every(validateRemoteModule) || !runtimePages.every(validateRuntimePage) || !runtimeDashboardWidgets.every(validateRuntimeWidget) || !runtimeEntityTabs.every(validateRuntimeEntityTab) || !runtimeEntityActions.every(validateRuntimeEntityAction)) return null;
+  const permissions = manifest.permissions || [];
+  if (themes.length && !permissions.includes("ui:theme")) return null;
+  if (remoteModules.length && !permissions.includes("remote:frame")) return null;
+  if ((runtimePages.length || runtimeDashboardWidgets.length || runtimeEntityTabs.length) && !permissions.includes("runtime:sandbox")) return null;
+  if (runtimePages.some(page => page.navigation) && !permissions.includes("ui:navigation")) return null;
+  if (runtimeDashboardWidgets.length && !permissions.includes("ui:dashboard")) return null;
+  if (runtimeEntityTabs.length && !permissions.includes("ui:entity-tabs")) return null;
+  if (runtimeEntityActions.length && !permissions.includes("ui:entity-actions")) return null;
   return candidate;
 }
 
@@ -199,7 +260,7 @@ export function ExtensionProvider({ children }: { children: React.ReactNode }) {
 
   const extensions = useMemo<InstalledExtension[]>(() => [
     ...extensionRegistry.map(extension => ({ ...extension, source: extension.manifest.builtIn ? "built-in" as const : "package" as const })),
-    ...importedPackages.map(pkg => ({ ...toDefinition(pkg), source: pkg.manifest.id.startsWith("local.theme.") ? "custom" as const : "imported" as const })),
+    ...importedPackages.map(pkg => ({ ...toDefinition(pkg), source: pkg.manifest.id.startsWith("local.theme.") ? "custom" as const : hasRuntimeFiles(pkg) ? "module-zip" as const : "imported" as const })),
   ], [importedPackages]);
 
   const enabledIds = useMemo(() => new Set([CORE_EXTENSION, ...state.enabledIds]), [state.enabledIds]);
@@ -292,6 +353,7 @@ export function ExtensionProvider({ children }: { children: React.ReactNode }) {
       const parsed = validatePortablePackage(JSON.parse(raw));
       if (!parsed) return { ok: false as const, error: "Invalid extension package, unsafe URL/CSS, or unsupported contribution." };
       const normalized = normalizePortablePackage(parsed);
+      if (hasRuntimeFiles(normalized)) return { ok: false as const, error: "Runtime pages/widgets/tabs must be installed from a ZIP package so their bundled files are available." };
       if (extensionRegistry.some(item => item.manifest.id === normalized.manifest.id) || importedPackages.some(item => item.manifest.id === normalized.manifest.id)) return { ok: false as const, error: "An extension with this ID is already installed." };
       const existingThemeIds = new Set(extensions.flatMap(item => item.contributes?.themes?.map(theme => theme.id) || []));
       if ((normalized.contributes.themes || []).some(theme => existingThemeIds.has(theme.id))) return { ok: false as const, error: "A theme with this ID is already installed." };
@@ -303,6 +365,36 @@ export function ExtensionProvider({ children }: { children: React.ReactNode }) {
       });
       return { ok: true as const, extensionId: normalized.manifest.id };
     } catch { return { ok: false as const, error: "The selected extension package is not valid JSON." }; }
+  }, [extensions, importedPackages, persistPackages]);
+
+  const installModuleArchive = useCallback(async (archive: SpentaModuleArchive) => {
+    try {
+      const parsed = validatePortablePackage(JSON.parse(archive.manifestText));
+      if (!parsed) return { ok: false as const, error: "Invalid SpentaCRM module manifest or unsupported contribution." };
+      const normalized = normalizePortablePackage(parsed);
+      if (!normalized.manifest.complexity) return { ok: false as const, error: "Module ZIPs must declare manifest.complexity: simple, medium, advanced or professional." };
+      if (!normalized.manifest.categories.includes("module")) return { ok: false as const, error: "Module ZIP manifests must include the module category." };
+      if (extensionRegistry.some(item => item.manifest.id === normalized.manifest.id) || importedPackages.some(item => item.manifest.id === normalized.manifest.id)) return { ok: false as const, error: "An extension with this ID is already installed." };
+      const entries = runtimeEntries(normalized);
+      const pageIds = new Set((normalized.contributes.runtimePages || []).map(page => page.id));
+      const invalidAction = (normalized.contributes.runtimeEntityActions || []).find(action => action.action.type === "open-page" && !pageIds.has(action.action.pageId));
+      if (invalidAction) return { ok: false as const, error: `Entity action ${invalidAction.id} points to a missing runtime page.` };
+      if (!entries.length && !(normalized.contributes.remoteModules?.length || normalized.contributes.themes?.length)) return { ok: false as const, error: "The module ZIP does not expose any runtime surface." };
+      const missing = entries.filter(entry => !archive.files[entry]);
+      if (missing.length) return { ok: false as const, error: `The module ZIP is missing runtime file: ${missing[0]}` };
+      const existingThemeIds = new Set(extensions.flatMap(item => item.contributes?.themes?.map(theme => theme.id) || []));
+      if ((normalized.contributes.themes || []).some(theme => existingThemeIds.has(theme.id))) return { ok: false as const, error: "A theme with this ID is already installed." };
+      if (entries.length) await saveRuntimePackage(normalized.manifest.id, archive.files);
+      persistPackages([...importedPackages, normalized]);
+      setState(current => {
+        const next = { ...current, enabledIds: [...new Set([...current.enabledIds, normalized.manifest.id])] };
+        localStorage.setItem(STATE_KEY, JSON.stringify(next));
+        return next;
+      });
+      return { ok: true as const, extensionId: normalized.manifest.id };
+    } catch (error) {
+      return { ok: false as const, error: error instanceof Error ? error.message : "The selected module ZIP could not be installed." };
+    }
   }, [extensions, importedPackages, persistPackages]);
 
   const upsertCustomTheme = useCallback((theme: ThemeContribution, extensionId?: string) => {
@@ -346,7 +438,8 @@ export function ExtensionProvider({ children }: { children: React.ReactNode }) {
 
   const uninstallExtension = useCallback((extensionId: string) => {
     const ext = extensions.find(item => item.manifest.id === extensionId);
-    if (!ext || !["imported", "custom"].includes(ext.source)) return;
+    if (!ext || !["imported", "module-zip", "custom"].includes(ext.source)) return;
+    if (ext.source === "module-zip") void removeRuntimePackage(extensionId);
     persistPackages(importedPackages.filter(item => item.manifest.id !== extensionId));
     setState(current => {
       const next = { enabledIds: current.enabledIds.filter(id => id !== extensionId), activeThemeId: ext.contributes?.themes?.some(theme => theme.id === current.activeThemeId) ? DEFAULT_THEME : current.activeThemeId };
@@ -357,8 +450,8 @@ export function ExtensionProvider({ children }: { children: React.ReactNode }) {
 
   const value = useMemo<ExtensionContextValue>(() => ({
     extensions, enabledIds, activeThemeId: state.activeThemeId, activeTheme, themes, remoteModules,
-    setExtensionEnabled, setActiveTheme, installPortablePackage, installThemePackage: installPortablePackage, upsertCustomTheme, exportThemePackage, uninstallExtension,
-  }), [extensions, enabledIds, state.activeThemeId, activeTheme, themes, remoteModules, setExtensionEnabled, setActiveTheme, installPortablePackage, upsertCustomTheme, exportThemePackage, uninstallExtension]);
+    setExtensionEnabled, setActiveTheme, installPortablePackage, installModuleArchive, installThemePackage: installPortablePackage, upsertCustomTheme, exportThemePackage, uninstallExtension,
+  }), [extensions, enabledIds, state.activeThemeId, activeTheme, themes, remoteModules, setExtensionEnabled, setActiveTheme, installPortablePackage, installModuleArchive, upsertCustomTheme, exportThemePackage, uninstallExtension]);
 
   const effect = visualDefaults(activeTheme?.visuals).effect;
   return <ExtensionContext.Provider value={value}><ThemeLayers effect={effect}/>{children}</ExtensionContext.Provider>;

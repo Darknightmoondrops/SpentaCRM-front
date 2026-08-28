@@ -3,7 +3,7 @@ import { workspaceUsers } from "@/lib/mock-data";
 import type { AuthSession, PermissionKey } from "@/lib/types";
 import { permissionsForRole } from "./permissions";
 
-export const DEMO_SESSION_STORAGE_KEY = "b2b-crm:auth-session:v1";
+export const DEMO_SESSION_STORAGE_KEY = "spentacrm:auth-session:v1";
 export const DEMO_SESSION_COOKIE = "b2b_crm_demo_session";
 export const DEMO_PASSWORD = "demo1234";
 

@@ -1,7 +1,9 @@
 import type { ComponentType } from "react";
 
-export const EXTENSION_API_VERSION = 2 as const;
-export const LEGACY_EXTENSION_API_VERSIONS = [1] as const;
+export const EXTENSION_API_VERSION = 3 as const;
+export const LEGACY_EXTENSION_API_VERSIONS = [1, 2] as const;
+
+export type ModuleComplexity = "simple" | "medium" | "advanced" | "professional";
 
 export type ExtensionCategory =
   | "theme"
@@ -22,6 +24,7 @@ export type ExtensionPermission =
   | "ui:entity-tabs"
   | "ui:entity-actions"
   | "remote:frame"
+  | "runtime:sandbox"
   | "crm:companies:read"
   | "crm:companies:write"
   | "crm:contacts:read"
@@ -212,6 +215,51 @@ export type EntityActionContribution = {
   run: (props: EntityContributionProps) => void | Promise<void>;
 };
 
+
+export type RuntimeSurfaceHeight = "compact" | "content" | "viewport";
+
+/**
+ * A UI surface shipped inside an uploaded SpentaCRM module ZIP.
+ * `entry` points to a bundled HTML file inside the archive (for example `dist/pages/inventory.html`).
+ * Runtime surfaces are always rendered in sandboxed iframes and never receive same-origin access.
+ */
+export type RuntimePageContribution = {
+  id: string;
+  title: string;
+  description?: string;
+  entry: string;
+  navigation?: { label: string; section?: NavigationSection };
+  height?: RuntimeSurfaceHeight;
+};
+
+export type RuntimeDashboardWidgetContribution = {
+  id: string;
+  title: string;
+  zone: DashboardWidgetZone;
+  entry: string;
+  height?: number;
+};
+
+export type RuntimeEntityTabContribution = {
+  id: string;
+  entity: EntityKind;
+  label: string;
+  entry: string;
+  height?: number;
+};
+
+export type RuntimeEntityAction =
+  | { type: "open-page"; pageId: string }
+  | { type: "open-url"; url: string };
+
+export type RuntimeEntityActionContribution = {
+  id: string;
+  entity: EntityKind;
+  label: string;
+  tone?: "default" | "primary" | "danger";
+  action: RuntimeEntityAction;
+};
+
 export type ExtensionManifest = {
   apiVersion: typeof EXTENSION_API_VERSION;
   id: string;
@@ -225,6 +273,8 @@ export type ExtensionManifest = {
   license?: string;
   builtIn?: boolean;
   iconUrl?: string;
+  /** Human-facing module complexity tier used by the SpentaCRM module catalogue. */
+  complexity?: ModuleComplexity;
 };
 
 export type ExtensionDefinition = {
@@ -240,19 +290,29 @@ export type ExtensionDefinition = {
     settings?: SettingsContribution[];
     entityTabs?: EntityTabContribution[];
     entityActions?: EntityActionContribution[];
+    /** Sandboxed surfaces delivered inside an uploaded module ZIP. */
+    runtimePages?: RuntimePageContribution[];
+    runtimeDashboardWidgets?: RuntimeDashboardWidgetContribution[];
+    runtimeEntityTabs?: RuntimeEntityTabContribution[];
+    runtimeEntityActions?: RuntimeEntityActionContribution[];
   };
 };
 
 /**
- * Safe runtime package. It contains serializable data only. Themes run in the CRM theme engine.
- * Remote modules run inside sandboxed iframes and never execute JavaScript in the CRM origin.
+ * Serializable manifest stored in `spenta-module.json`. A module ZIP may also contain
+ * bundled HTML/CSS/JS/assets referenced by the runtime contribution `entry` fields.
+ * Those files execute only inside sandboxed iframes.
  */
 export type PortableExtensionPackage = {
-  apiVersion: typeof EXTENSION_API_VERSION | 1;
+  apiVersion: typeof EXTENSION_API_VERSION | 2 | 1;
   manifest: Omit<ExtensionManifest, "apiVersion" | "builtIn"> & { apiVersion?: never };
   contributes: {
     themes?: ThemeContribution[];
     remoteModules?: RemoteModuleContribution[];
+    runtimePages?: RuntimePageContribution[];
+    runtimeDashboardWidgets?: RuntimeDashboardWidgetContribution[];
+    runtimeEntityTabs?: RuntimeEntityTabContribution[];
+    runtimeEntityActions?: RuntimeEntityActionContribution[];
   };
 };
 
