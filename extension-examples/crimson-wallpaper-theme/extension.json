@@ -1,5 +1,5 @@
 {
-  "apiVersion": 2,
+  "apiVersion": 3,
   "manifest": {
     "id": "example.crimson-wallpaper",
     "name": "Crimson Wallpaper",

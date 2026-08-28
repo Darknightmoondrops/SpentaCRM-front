@@ -1,0 +1,43 @@
+{
+  "apiVersion": 3,
+  "manifest": {
+    "id": "example.customer-success",
+    "name": "Customer Success",
+    "version": "1.0.0",
+    "publisher": "SpentaCRM Examples",
+    "description": "Customer success overview with a dashboard widget.",
+    "complexity": "medium",
+    "categories": [
+      "module"
+    ],
+    "permissions": [
+      "runtime:sandbox",
+      "ui:navigation",
+      "ui:dashboard"
+    ]
+  },
+  "contributes": {
+    "runtimePages": [
+      {
+        "id": "workspace",
+        "title": "Customer Success",
+        "description": "Customer success overview with a dashboard widget.",
+        "entry": "dist/pages/workspace.html",
+        "navigation": {
+          "label": "Customer Success",
+          "section": "extensions"
+        },
+        "height": "viewport"
+      }
+    ],
+    "runtimeDashboardWidgets": [
+      {
+        "id": "summary",
+        "title": "Customer Success summary",
+        "zone": "dashboard.afterStats",
+        "entry": "dist/widgets/summary.html",
+        "height": 220
+      }
+    ]
+  }
+}

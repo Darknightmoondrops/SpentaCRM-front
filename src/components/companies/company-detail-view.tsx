@@ -8,6 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ActivityIcon, ArrowIcon, CompanyIcon, ContactIcon, DealIcon, ProjectIcon } from "@/components/icons";
 import { Badge, Progress, SectionTitle } from "@/components/ui";
 import { ConfirmDialog, Modal, Toast } from "@/components/overlay";
+import { EntityExtensionPoints } from "@/components/extensions/entity-extension-points";
 import { currency } from "@/lib/format";
 import { productConfig } from "@/config/product";
 import { formatDealDate } from "@/lib/deal-utils";
@@ -233,6 +234,8 @@ export function CompanyDetailView({
       {tab === "activity" && <section className="panel tab-panel"><SectionTitle eyebrow="Relationship history" title="Activity" action={{ label: "Log activity", href: `/activities?new=1&relationType=COMPANY&relationId=${company.id}` as Route }} />{liveActivities.length ? <div className="account-activity-list">{liveActivities.map((activity) => <div className="account-activity" key={activity.id}><div className="activity-icon"><ActivityIcon /></div><div><strong>{activity.title}</strong><p>{activity.detail}</p><span>{activity.actor} · {activity.time} · {activity.relation}</span></div><Badge>{activity.type}</Badge></div>)}</div> : <div className="data-empty"><strong>No account activity yet.</strong><p>Meetings, calls, email notes and record updates will roll up here.</p></div>}</section>}
 
       {tab === "files" && <section className="panel tab-panel"><SectionTitle eyebrow="Account documents" title="Files" /><div className="files-placeholder"><div className="files-code">ATTACHMENTS / RESERVED</div><h3>Document surface is ready for the attachment API.</h3><p>Proposals, requirements, contracts and customer-provided files will be linked to this account without turning the CRM into a document management system.</p><button className="secondary-button" type="button" disabled>Upload file · Phase 06</button></div></section>}
+
+      <EntityExtensionPoints entityType="company" entityId={company.id} />
 
       <Modal open={editing} onClose={() => setEditing(false)} eyebrow="CRM / Company" title={`Edit ${company.name}`} size="lg" footer={<><button className="secondary-button" type="button" onClick={() => setEditing(false)}>Cancel</button><button className="primary-button" type="submit" form="company-form">Save changes</button></>}>
         <CompanyForm key={company.updatedAt} company={company} owners={owners} onSubmit={save} />

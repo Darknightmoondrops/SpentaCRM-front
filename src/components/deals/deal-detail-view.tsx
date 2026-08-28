@@ -5,6 +5,7 @@ import type { Route } from "next";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ActivityIcon, ArrowIcon, CheckIcon, DealIcon, ProjectIcon, TaskIcon } from "@/components/icons";
+import { EntityExtensionPoints } from "@/components/extensions/entity-extension-points";
 import { Modal, Toast } from "@/components/overlay";
 import { Badge, Progress, SectionTitle } from "@/components/ui";
 import type { DealPayload } from "@/lib/deal-api";
@@ -209,6 +210,8 @@ export function DealDetailView({
         <SectionTitle eyebrow="Handoff" title="Delivery connection" action={linkedProject ? { label: "Project portfolio", href: "/projects" } : undefined} />
         {linkedProject ? <Link href={`/projects/${linkedProject.id}` as Route} className="delivery-card delivery-card-link"><div className="deal-linked-icon"><ProjectIcon /></div><div><Badge tone="blue">{linkedProject.status.replaceAll("_", " ")}</Badge><h3>{linkedProject.title}</h3><p>{linkedProject.owner} · team {linkedProject.team} · target {linkedProject.target}</p><Progress value={linkedProject.progress} /></div><strong>{linkedProject.progress}%</strong></Link> : <div className="delivery-empty"><div className="deal-linked-icon"><ProjectIcon /></div><div><strong>No project created from this deal.</strong><p>{deal.stage === "WON" ? "Create delivery work while retaining this deal as the immutable commercial source." : "Only a won opportunity can be converted into a delivery project."}</p>{deal.stage === "WON" && <Link className="primary-button compact-action" href={`/projects?new=1&sourceDealId=${deal.id}` as Route}>Create project <ArrowIcon /></Link>}</div></div>}
       </section>}
+
+      <EntityExtensionPoints entityType="deal" entityId={deal.id} />
 
       <Modal open={editing} onClose={() => setEditing(false)} title="Edit deal" eyebrow="Commercial record" size="lg" footer={<><button className="secondary-button" type="button" onClick={() => setEditing(false)}>Cancel</button><button className="primary-button" type="submit" form="deal-form">Save changes</button></>}>
         {editing && <DealForm deal={deal} companies={companies} contacts={contacts} owners={owners} onSubmit={save} />}

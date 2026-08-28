@@ -1,0 +1,66 @@
+{
+  "apiVersion": 3,
+  "manifest": {
+    "id": "example.inventory",
+    "name": "Inventory Management",
+    "version": "1.0.0",
+    "publisher": "SpentaCRM Examples",
+    "description": "Inventory workspace with dashboard and company extension points.",
+    "complexity": "advanced",
+    "categories": [
+      "module"
+    ],
+    "permissions": [
+      "runtime:sandbox",
+      "ui:navigation",
+      "ui:dashboard",
+      "ui:entity-tabs",
+      "ui:entity-actions"
+    ]
+  },
+  "contributes": {
+    "runtimePages": [
+      {
+        "id": "workspace",
+        "title": "Inventory Management",
+        "description": "Inventory workspace with dashboard and company extension points.",
+        "entry": "dist/pages/workspace.html",
+        "navigation": {
+          "label": "Inventory Management",
+          "section": "extensions"
+        },
+        "height": "viewport"
+      }
+    ],
+    "runtimeDashboardWidgets": [
+      {
+        "id": "summary",
+        "title": "Inventory Management summary",
+        "zone": "dashboard.afterStats",
+        "entry": "dist/widgets/summary.html",
+        "height": 220
+      }
+    ],
+    "runtimeEntityTabs": [
+      {
+        "id": "company-module",
+        "entity": "company",
+        "label": "Inventory Management",
+        "entry": "dist/tabs/company.html",
+        "height": 300
+      }
+    ],
+    "runtimeEntityActions": [
+      {
+        "id": "open-workspace",
+        "entity": "company",
+        "label": "Open Inventory Management",
+        "tone": "primary",
+        "action": {
+          "type": "open-page",
+          "pageId": "workspace"
+        }
+      }
+    ]
+  }
+}

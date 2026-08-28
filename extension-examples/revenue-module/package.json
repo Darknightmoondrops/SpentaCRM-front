@@ -1,10 +1,10 @@
 {
-  "name": "@example/b2b-crm-revenue-intelligence",
+  "name": "@example/spentacrm-revenue-intelligence",
   "version": "1.0.0",
   "type": "module",
   "main": "./index.tsx",
   "peerDependencies": {
-    "@b2b-crm/extension-sdk": "^2.0.0",
+    "@spentacrm/extension-sdk": ">=3.0.0 <4",
     "react": ">=19"
   }
 }

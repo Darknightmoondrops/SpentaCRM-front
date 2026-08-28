@@ -1,6 +1,6 @@
 {
-  "name": "b2b-crm-frontend",
-  "version": "0.11.0",
+  "name": "spentacrm-frontend",
+  "version": "0.13.2",
   "private": true,
   "engines": {
     "node": ">=20.9.0"
@@ -22,8 +22,7 @@
   "dependencies": {
     "next": "16.3.3",
     "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "@b2b-crm/extension-sdk": "file:packages/extension-sdk"
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@types/node": "^22.17.2",

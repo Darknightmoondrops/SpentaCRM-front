@@ -2,16 +2,16 @@ import { defineExtension } from "../sdk";
 
 export const crimsonThemeExtension = defineExtension({
   manifest: {
-    apiVersion: 2,
-    id: "b2bcrm.crimson-theme",
+    apiVersion: 3,
+    id: "spentacrm.crimson-theme",
     name: "Crimson Ritual",
     version: "2.0.0",
-    publisher: "B2B CRM",
+    publisher: "SpentaCRM",
     description: "A dramatic crimson glass theme with animated blood-mist ambience.",
     categories: ["theme"], permissions: ["ui:theme"], builtIn: true,
   },
   contributes: { themes: [{
-    id: "b2bcrm.crimson-ritual", label: "Crimson Ritual", description: "Dark glass surfaces, deep red accents and slow atmospheric motion.", appearance: "dark",
+    id: "spentacrm.crimson-ritual", label: "Crimson Ritual", description: "Dark glass surfaces, deep red accents and slow atmospheric motion.", appearance: "dark",
     tokens: {
       "--ink":"#fff1f2","--ink-soft":"#e9c8cc","--paper":"#100607","--surface":"#1a0b0d","--surface-2":"#241013","--surface-raised":"#1f0d10",
       "--line":"#4a2026","--line-strong":"#74303a","--muted":"#b58c92","--accent":"#e11d48","--accent-soft":"#48101f","--blue":"#281b35",

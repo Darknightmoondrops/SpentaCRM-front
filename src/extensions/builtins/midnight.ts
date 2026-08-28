@@ -2,11 +2,11 @@ import { defineExtension } from "../sdk";
 
 export const midnightThemeExtension = defineExtension({
   manifest: {
-    apiVersion: 2, id: "b2bcrm.midnight-theme", name: "Midnight", version: "1.0.0", publisher: "B2B CRM",
+    apiVersion: 3, id: "spentacrm.midnight-theme", name: "Midnight", version: "1.0.0", publisher: "SpentaCRM",
     description: "Dark theme for low-light work and operations rooms.", categories: ["theme"], permissions: ["ui:theme"], builtIn: true,
   },
   contributes: { themes: [{
-    id: "b2bcrm.midnight", label: "Midnight", description: "Dark navy workspace with an electric blue accent.", appearance: "dark",
+    id: "spentacrm.midnight", label: "Midnight", description: "Dark navy workspace with an electric blue accent.", appearance: "dark",
     tokens: {
       "--ink": "#edf2ff", "--ink-soft": "#cbd5e7", "--paper": "#0d1422", "--surface": "#131d2d", "--surface-2": "#192538",
       "--surface-raised": "#172235", "--line": "#26354d", "--line-strong": "#3b4e69", "--muted": "#98a6bb", "--accent": "#7892ff",

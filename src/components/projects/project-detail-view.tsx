@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ActivityIcon, ArrowIcon, CheckIcon, CompanyIcon, DealIcon, ProjectIcon, TaskIcon } from "@/components/icons";
 import { ConfirmDialog, Modal, Toast } from "@/components/overlay";
+import { EntityExtensionPoints } from "@/components/extensions/entity-extension-points";
 import { Badge, Progress, SectionTitle } from "@/components/ui";
 import { hydrateMockCompanies } from "@/lib/mock-company-store";
 import { hydrateMockDeals } from "@/lib/mock-deal-store";
@@ -205,6 +206,8 @@ export function ProjectDetailView({
       {tab === "team" && <section className="panel tab-panel"><SectionTitle eyebrow="Delivery team" title="People" />{teamMembers.length ? <div className="project-team-list">{teamMembers.map((member) => <div className="project-team-row" key={member.id}><span className="mini-avatar">{member.initials}</span><span><strong>{member.name}</strong><small>{member.id === project.ownerId ? "Project owner" : "Delivery member"}</small></span>{member.id === project.ownerId && <Badge tone="green">OWNER</Badge>}</div>)}</div> : <div className="data-empty"><strong>No team members.</strong><p>Edit the project to assign a delivery team.</p></div>}</section>}
 
       {tab === "files" && <section className="panel tab-panel"><SectionTitle eyebrow="Delivery documents" title="Files" /><div className="files-placeholder"><div className="files-code">PROJECT ATTACHMENTS / RESERVED</div><h3>Project documents are ready for the attachment API.</h3><p>Requirements, architecture decisions, hand-off material and customer-provided files can later attach to this project while binary storage remains outside PostgreSQL.</p><button className="secondary-button" type="button" disabled>Upload file · Phase 06</button></div></section>}
+
+      <EntityExtensionPoints entityType="project" entityId={project.id} />
 
       <Modal open={editing} onClose={() => setEditing(false)} eyebrow="DELIVERY / Project" title={`Edit ${project.title}`} size="lg" footer={<><button className="secondary-button" type="button" onClick={() => setEditing(false)}>Cancel</button><button className="primary-button" type="submit" form="project-form">Save changes</button></>}>
         <ProjectForm key={project.updatedAt} project={project} companies={companies} wonDeals={wonDeals} owners={owners} onSubmit={save} />

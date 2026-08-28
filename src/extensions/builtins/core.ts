@@ -2,11 +2,11 @@ import { defineExtension } from "../sdk";
 
 export const coreThemeExtension = defineExtension({
   manifest: {
-    apiVersion: 2,
-    id: "b2bcrm.core-theme",
-    name: "B2B CRM Clean",
+    apiVersion: 3,
+    id: "spentacrm.core-theme",
+    name: "SpentaCRM Clean",
     version: "1.0.0",
-    publisher: "B2B CRM",
+    publisher: "SpentaCRM",
     description: "The default clean B2B workspace theme.",
     categories: ["theme"],
     permissions: ["ui:theme"],
@@ -14,7 +14,7 @@ export const coreThemeExtension = defineExtension({
   },
   contributes: {
     themes: [{
-      id: "b2bcrm.clean",
+      id: "spentacrm.clean",
       label: "Clean",
       description: "Neutral light theme for everyday B2B work.",
       appearance: "light",

@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@b2b-crm/extension-sdk':
-        specifier: file:packages/extension-sdk
-        version: file:packages/extension-sdk(react@19.2.8)
       next:
         specifier: 16.3.3
         version: 16.3.3(@babel/core@7.29.7)(@types/node@22.20.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -44,11 +41,6 @@ importers:
         version: 5.9.3
 
 packages:
-
-  '@b2b-crm/extension-sdk@file:packages/extension-sdk':
-    resolution: {directory: packages/extension-sdk, type: directory}
-    peerDependencies:
-      react: '>=19'
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -1822,10 +1814,6 @@ packages:
     resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
 snapshots:
-
-  '@b2b-crm/extension-sdk@file:packages/extension-sdk(react@19.2.8)':
-    dependencies:
-      react: 19.2.8
 
   '@babel/code-frame@7.29.7':
     dependencies:

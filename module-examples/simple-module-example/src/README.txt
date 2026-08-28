@@ -1,0 +1,1 @@
+This folder represents authoring source. Build/bundle your UI into dist/*.html before packaging. Runtime HTML may reference bundled CSS/JS files in dist/.

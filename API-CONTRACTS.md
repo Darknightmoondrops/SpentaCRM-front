@@ -611,7 +611,7 @@ Backend invariants:
 
 ## Future extension platform API (backend phase)
 
-Extension API v2 currently persists portable runtime packages, custom themes and enabled state locally. Portable packages may contain validated themes and sandboxed HTTPS remote modules; trusted code packages remain deployment artifacts. When NestJS is introduced, workspace extension state should move to backend resources without changing the frontend SDK contract.
+Extension API v3 currently persists portable runtime packages, custom themes and enabled state locally. Portable packages may contain validated themes, sandboxed remote modules, and project-ZIP runtime pages/widgets/entity tabs whose files are stored in IndexedDB; trusted code packages remain deployment artifacts. When NestJS is introduced, workspace extension state should move to backend resources without changing the frontend SDK contract.
 
 Suggested resources:
 

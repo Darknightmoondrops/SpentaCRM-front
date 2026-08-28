@@ -27,7 +27,7 @@ function AccountHealthPage() {
 
 export const sampleWidgetExtension = defineExtension({
   manifest: {
-    apiVersion: 2, id: "b2bcrm.account-health-sample", name: "Account Health Sample", version: "1.0.0", publisher: "B2B CRM Labs",
+    apiVersion: 3, id: "spentacrm.account-health-sample", name: "Account Health Sample", version: "1.0.0", publisher: "SpentaCRM Labs",
     description: "Example code extension showing how dashboard widgets are contributed.", categories: ["analytics", "developer"],
     permissions: ["ui:dashboard", "crm:companies:read"], builtIn: true,
   },
@@ -35,6 +35,6 @@ export const sampleWidgetExtension = defineExtension({
     pages: [{ id: "account-health", title: "Account health", component: AccountHealthPage }],
     sidebar: [{ id: "account-health-nav", label: "Account health", pageId: "account-health", section: "extensions" }],
     dashboardWidgets: [{ id: "account-health", title: "Account health", zone: "dashboard.afterActivity", component: AccountHealthWidget }],
-    commands: [{ id: "open-account-health", title: "Open account health", category: "Accounts", keywords: ["health", "customers"], href: "/extension-pages/b2bcrm.account-health-sample/account-health" }],
+    commands: [{ id: "open-account-health", title: "Open account health", category: "Accounts", keywords: ["health", "customers"], href: "/extension-pages/spentacrm.account-health-sample/account-health" }],
   },
 });

@@ -1,4 +1,4 @@
-# Public B2B CRM design notes
+# SpentaCRM design notes
 
 This frontend is intentionally product-neutral. It is designed as a reusable CRM for B2B companies rather than as a branded implementation for one customer.
 

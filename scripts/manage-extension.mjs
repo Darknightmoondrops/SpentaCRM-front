@@ -8,7 +8,7 @@ if (!['add','remove'].includes(action) || !specifier) {
   process.exit(1);
 }
 const root = process.cwd();
-const configPath = path.join(root, 'crm.extensions.json');
+const configPath = path.join(root, 'spenta.extensions.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 const current = new Set(Array.isArray(config.extensions) ? config.extensions : []);
 if (action === 'add') current.add(specifier);

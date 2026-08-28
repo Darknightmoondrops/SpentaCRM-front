@@ -25,6 +25,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@spentacrm/extension-sdk": [
+        "./packages/extension-sdk/src/index.ts"
       ]
     }
   },

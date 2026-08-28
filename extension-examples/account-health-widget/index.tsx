@@ -1,4 +1,4 @@
-import { defineExtension } from "@b2b-crm/extension-sdk";
+import { defineExtension } from "@spentacrm/extension-sdk";
 
 function AccountHealthWidget() {
   return <section className="panel"><h2>Account Health</h2><p>Your extension owns this UI.</p></section>;
@@ -6,7 +6,7 @@ function AccountHealthWidget() {
 
 export default defineExtension({
   manifest: {
-    apiVersion: 2,
+    apiVersion: 3,
     id: "example.account-health",
     name: "Account Health",
     version: "1.0.0",
