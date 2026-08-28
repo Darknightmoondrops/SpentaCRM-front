@@ -7,7 +7,7 @@ export const productConfig = {
   locale: process.env.NEXT_PUBLIC_LOCALE || "en-GB",
   currency: process.env.NEXT_PUBLIC_DEFAULT_CURRENCY || "EUR",
   timezone: process.env.NEXT_PUBLIC_DEFAULT_TIMEZONE || "Europe/Berlin",
-  version: process.env.NEXT_PUBLIC_APP_VERSION || "v0.13",
+  version: process.env.NEXT_PUBLIC_APP_VERSION || "v0.13.2",
   demoUser: {
     name: process.env.NEXT_PUBLIC_DEMO_USER_NAME || "Alex Morgan",
     email: process.env.NEXT_PUBLIC_DEMO_USER_EMAIL || "alex@example.com",

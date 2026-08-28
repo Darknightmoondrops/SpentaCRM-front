@@ -4,7 +4,7 @@
   "type": "module",
   "exports": "./index.tsx",
   "peerDependencies": {
-    "@spentacrm/extension-sdk": ">=0.1.0",
+    "@spentacrm/extension-sdk": ">=3.0.0 <4",
     "react": ">=19"
   }
 }

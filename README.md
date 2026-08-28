@@ -1,20 +1,37 @@
 <div align="center">
+  <img src="./public/assets/brand/spentacrm-logo.png" alt="SpentaCRM logo" width="180" />
 
 # SpentaCRM
 
-### A free, customizable B2B CRM foundation for teams that want to launch fast and make the product their own.
+### Modular B2B CRM foundation for fast, company-specific deployments
 
-**Build once. Customize freely. Deploy anywhere.**
+**Build once. Customize freely. Extend safely. Deploy anywhere.**
 
-[English](#english) · [فارسی](#فارسی) · [Roadmap](./FRONTEND-ROADMAP.md) · [Extensions](./EXTENSIONS.md) · [API Contracts](./API-CONTRACTS.md)
+[English](#english) · [فارسی](#فارسی) · [Module Runtime](./MODULES.md) · [Extensions](./EXTENSIONS.md) · [Roadmap](./FRONTEND-ROADMAP.md) · [API Contracts](./API-CONTRACTS.md)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.3.3-black?logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-19.2.8-149ECA?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)
+![Module API](https://img.shields.io/badge/Module_API-v3-8B5CF6)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20.9-339933?logo=nodedotjs&logoColor=white)
-![Project Status](https://img.shields.io/badge/status-active_development-orange)
+![Status](https://img.shields.io/badge/status-active_development-F59E0B)
 
 </div>
+
+---
+
+## Product preview
+
+<table>
+  <tr>
+    <td width="50%" align="center"><strong>Operational Dashboard</strong><br/><img src="./public/assets/screenshots/dashboard.png" alt="SpentaCRM operational dashboard" /></td>
+    <td width="50%" align="center"><strong>Projects & Delivery</strong><br/><img src="./public/assets/screenshots/projects.png" alt="SpentaCRM projects and delivery" /></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><strong>Tasks & Work Queue</strong><br/><img src="./public/assets/screenshots/tasks.png" alt="SpentaCRM tasks and work queue" /></td>
+    <td width="50%" align="center"><strong>Deals & Pipeline</strong><br/><img src="./public/assets/screenshots/deals.png" alt="SpentaCRM deals and pipeline" /></td>
+  </tr>
+</table>
 
 ---
 
@@ -22,79 +39,54 @@
 
 ## What is SpentaCRM?
 
-**SpentaCRM** is a free B2B Customer Relationship Management platform designed as a reusable foundation for building company-specific CRM systems quickly.
+**SpentaCRM** is a free B2B Customer Relationship Management project designed as a reusable foundation for organizations that need to launch a CRM quickly and then adapt it to their own processes, terminology, branding, integrations, and business rules.
 
-The idea is simple: most organizations need many of the same CRM building blocks—accounts, contacts, opportunities, tasks, activities, permissions, dashboards, auditability, and integrations—but their workflows, terminology, branding, modules, and business rules are rarely identical.
+Most companies need the same fundamental CRM building blocks: companies/accounts, contacts, opportunities, tasks, activities, projects, permissions, dashboards, audit history, search, and integrations. What differs is how those pieces are connected. SpentaCRM keeps the common foundation in the core and pushes organization-specific capabilities into configuration, themes, integrations, and installable modules.
 
-SpentaCRM aims to provide the common foundation once, so developers and organizations can focus on the parts that actually make their CRM unique.
+The goal is not to create one rigid CRM for every company. The goal is to create a **CRM platform that can become different CRMs** depending on the organization using it.
 
-Instead of rebuilding a CRM from zero for every company, you can use SpentaCRM as a starting point, configure the workspace, adapt the workflow, install or build extensions, customize the theme, connect your own backend, and evolve it into a dedicated product for your organization.
+> Instead of rebuilding the same CRM foundation for every customer, start with SpentaCRM and build only what makes that deployment unique.
 
-> SpentaCRM is not intended to force every company into one fixed CRM model. The long-term goal is to support multiple CRM models and extension-driven workflows for different B2B use cases.
-
-The project is under active development. New CRM models, modules, integrations, automation capabilities, AI-assisted features, customization options, and developer tooling are expected to be introduced in future releases.
+SpentaCRM is under active development. Additional CRM models, automation, integrations, analytics, AI-assisted workflows, agentic CRM capabilities, module tooling, and deployment options are expected to evolve over time.
 
 ---
 
-## Why SpentaCRM?
-
-Building a custom CRM usually means spending significant time recreating infrastructure that has little to do with the company's unique business logic.
-
-SpentaCRM is intended to reduce that repeated work by offering:
-
-- a ready-to-extend B2B CRM foundation;
-- fast setup for internal or customer-specific deployments;
-- company-neutral and white-label product configuration;
-- modular business surfaces rather than one monolithic workflow;
-- an extension system inspired by modern developer platforms;
-- customizable themes and workspace appearance;
-- frontend contracts prepared for a separate production backend;
-- a codebase that can grow from a lightweight CRM into a larger business platform.
-
-Typical use cases include B2B SaaS, software companies, professional services, consultancies, logistics, industrial organizations, financial services, energy, healthcare technology, and other account-led businesses.
-
----
-
-## Current product scope
-
-The current frontend release covers the core operational foundation of a B2B CRM.
+## Core product scope
 
 ### Relationship management
 
 - Companies / Accounts
 - Contacts and stakeholder relationships
-- Primary-contact management
-- Account-level activity roll-ups
-- Search, filtering, sorting, pagination-ready state
-- Archive and reactivate lifecycle flows
+- Primary contact management
+- Account-level activity context
+- Search, filters, sorting, and pagination-ready state
+- Archive and reactivate flows
 
 ### Sales and pipeline
 
 - Deals / Opportunities
 - Pipeline and list views
-- Stage-based workflow
+- Stage-based sales workflow
 - Weighted pipeline and forecast calculations
-- Deal value, probability, expected close date, and commercial context
-- Won / lost / reopen transitions
+- Deal value, probability, expected close date, owner, company, and contact context
+- Won / Lost / Reopen transitions
 - Required loss reasons
-- Company, contact, and owner associations
 
 ### Delivery and projects
 
-- Customer-facing Projects
+- Customer-facing projects
 - Won Deal → Project handoff
 - Delivery owner and team assignment
-- Project status, health, dates, and progress
-- Milestones
-- Account and source-deal relationships
+- Project health, progress, dates, and milestones
+- Company and source-deal relationships
 - Archive and reactivate lifecycle
 
-SpentaCRM intentionally keeps project management lightweight. It is designed to preserve customer delivery context inside the CRM rather than replace dedicated tools such as Jira or Linear.
+SpentaCRM keeps project management intentionally lightweight. The purpose is to preserve commercial and delivery context inside the CRM, not to replace dedicated engineering tools such as Jira or Linear.
 
 ### Tasks and activities
 
 - Shared work queue
-- Task priorities and due states
+- Due states and priorities
 - Start, pause, complete, reopen, archive, and reactivate flows
 - Tasks linked to Companies, Contacts, Deals, or Projects
 - Activity timeline
@@ -112,9 +104,9 @@ SpentaCRM intentionally keeps project management lightweight. It is designed to 
 - Priority work queue
 - Account attention radar
 - Customer activity intelligence
-- URL-backed account, team, and period scope
+- Account, team-member, and period scoping
 
-### Authentication and workspace administration
+### Authentication, RBAC, and administration
 
 - Sign-in flow
 - Mock and API authentication adapters
@@ -124,118 +116,338 @@ SpentaCRM intentionally keeps project management lightweight. It is designed to 
 - Member management
 - Invite, suspend, and reactivate flows
 - System and custom roles
-- RBAC permission manifests
 - Permission-aware navigation and pages
 
-### Auditability
+### Auditability and productivity
 
-- Immutable read-only Audit Log UI
-- Search and filters
+- Read-only Audit Log UI
 - Actor, action, and entity filtering
-- Event detail view
-- Before/after diff presentation
-- Backend-ready audit contracts
-
-### Global productivity
-
+- Before/after event details
 - Global `Cmd/Ctrl + K` search
 - Deep links to CRM records
 - Responsive application shell
 - Loading, error, recovery, and empty states
-- Accessibility baseline
-- Server Components by default
-- Suspense and streaming boundaries
-- Next.js Parallel Routes on dashboard surfaces
+- Suspense, streaming, and dashboard Parallel Routes
 
 ---
 
-## Portable Module ZIPs
+## Modular by design
 
-SpentaCRM can install optional company capabilities from ZIP packages at runtime. Each ZIP contains a validated `spenta-module.json` manifest and declares one of four complexity levels: **simple**, **medium**, **advanced**, or **professional**. Installed modules appear in the **Modules & Extensions** catalogue and can be enabled or disabled per workspace.
+A central goal of SpentaCRM is to let a company add capabilities **without turning the core CRM into a collection of customer-specific branches**.
 
-A module ZIP is a small project package: `spenta-module.json` is only the manifest, while browser-ready HTML/CSS/JS under `dist/` implements the actual page, dashboard widget or entity tab. Package files are persisted in IndexedDB and rendered in sandboxed iframes, so portable modules can be installed without rebuilding Next.js and without executing uploaded code in the parent CRM origin. Trusted React/TypeScript extensions continue to use the compile-time registry. See [`MODULES.md`](./MODULES.md).
+SpentaCRM currently supports two extension trust models:
+
+| Model | Best for | Installation | Execution |
+| --- | --- | --- | --- |
+| **Portable Module ZIP** | Company-specific pages, widgets, tabs, actions, small applications | Runtime | Sandboxed iframe |
+| **Trusted Code Extension** | Deep React/TypeScript integrations that need direct core access | Build / deployment time | Trusted application code |
+
+This separation makes it possible to support convenient runtime installation while keeping untrusted uploaded code away from the main CRM origin.
 
 ---
 
-## Extension platform
+## Portable Module ZIPs — Module Runtime v3
 
-One of SpentaCRM's core goals is to make the CRM extensible instead of forcing every customization into the core codebase.
+A module is a **small project packaged as ZIP**. It is not just a JSON configuration file.
 
-The current **Extension API v3** supports several contribution models.
+The JSON file is the module manifest. The actual feature is implemented by browser-ready files packaged with it.
 
-### Portable runtime extensions
+```text
+inventory-module.zip
+├── spenta-module.json          # identity, permissions, contribution map
+├── src/                        # optional source code for maintainability
+│   ├── inventory.ts
+│   └── inventory.css
+├── dist/                       # browser-ready runtime surfaces
+│   ├── pages/
+│   │   └── inventory.html
+│   ├── widgets/
+│   │   └── stock-health.html
+│   ├── tabs/
+│   │   └── company-stock.html
+│   ├── shared.css
+│   └── runtime.js
+└── README.md
+```
 
-Portable JSON extensions can add themes and remote modules without rebuilding the application.
+`src/` is optional and may contain TypeScript, React source, build scripts, or design files. SpentaCRM does **not** compile arbitrary uploaded TypeScript at runtime. Module authors build their code first and package self-contained HTML/CSS/JS runtime entries under `dist/`.
 
-They can be installed at runtime while keeping uploaded packages away from unrestricted same-origin JavaScript execution.
+### What a ZIP module can add today
 
-### Trusted code extensions
+A portable module can contribute:
 
-Trusted React / TypeScript packages can contribute richer application functionality and are installed as deployment-trusted packages.
+- **new pages** hosted by SpentaCRM;
+- **sidebar navigation** pointing to module pages;
+- **dashboard widgets**;
+- **entity tabs** on Company, Contact, Deal, and Project records;
+- **entity actions** such as opening a module page or an external URL;
+- isolated browser UI and business workflows;
+- HTTPS API calls from the sandbox, subject to the runtime Content Security Policy.
 
-Supported contribution points currently include:
+This means a company can install something such as Inventory, Customer Success, Meeting Management, Expense Tracking, Account Scoring, an internal portal, or a domain-specific tool without modifying the Next.js route tree for each deployment.
 
-- themes;
-- modules;
-- extension-owned pages;
-- dashboard widgets;
-- sidebar navigation;
-- command-palette actions;
-- sandboxed remote modules.
+### Complexity tiers
 
-Portable API v3 modules can also mount sandboxed pages, dashboard widgets and entity tabs. Entity host surfaces are currently wired for Company, Contact, Deal and Project records.
+Every module can declare a descriptive complexity tier:
 
-See [EXTENSIONS.md](./EXTENSIONS.md) and [extension-examples](./extension-examples/) for the extension model and examples.
+- **simple** — one focused capability with a small UI and minimal permissions;
+- **medium** — a broader workflow with several surfaces or an external integration;
+- **advanced** — multiple pages/extension points and richer company workflows;
+- **professional** — enterprise-scale module structure, multiple business surfaces, audited integrations, and typically a companion backend service.
+
+The tier describes the module; permissions still determine what it declares and what the host allows.
+
+---
+
+## Manifest v3 example
+
+```json
+{
+  "apiVersion": 3,
+  "manifest": {
+    "id": "vendor.inventory",
+    "name": "Inventory Management",
+    "version": "1.0.0",
+    "publisher": "Vendor",
+    "description": "Inventory and stock management for B2B accounts.",
+    "complexity": "advanced",
+    "categories": ["module"],
+    "permissions": [
+      "runtime:sandbox",
+      "ui:navigation",
+      "ui:dashboard",
+      "ui:entity-tabs",
+      "ui:entity-actions"
+    ]
+  },
+  "contributes": {
+    "runtimePages": [
+      {
+        "id": "inventory",
+        "title": "Inventory",
+        "entry": "dist/pages/inventory.html",
+        "navigation": {
+          "label": "Inventory",
+          "section": "extensions"
+        },
+        "height": "viewport"
+      }
+    ],
+    "runtimeDashboardWidgets": [
+      {
+        "id": "stock-health",
+        "title": "Stock health",
+        "zone": "dashboard.afterStats",
+        "entry": "dist/widgets/stock-health.html",
+        "height": 240
+      }
+    ],
+    "runtimeEntityTabs": [
+      {
+        "id": "company-stock",
+        "entity": "company",
+        "label": "Inventory",
+        "entry": "dist/tabs/company-stock.html",
+        "height": 420
+      }
+    ],
+    "runtimeEntityActions": [
+      {
+        "id": "open-inventory",
+        "entity": "company",
+        "label": "Open Inventory",
+        "tone": "primary",
+        "action": {
+          "type": "open-page",
+          "pageId": "inventory"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Runtime contribution points
+
+| Contribution | Purpose |
+| --- | --- |
+| `runtimePages` | Adds a complete module-owned page through SpentaCRM's stable extension host route |
+| `runtimeDashboardWidgets` | Adds an isolated widget to a supported dashboard zone |
+| `runtimeEntityTabs` | Adds a tab to Company, Contact, Deal, or Project extension surfaces |
+| `runtimeEntityActions` | Adds an entity action; currently supports `open-page` and `open-url` |
+
+Supported dashboard zones currently include:
+
+```text
+dashboard.afterStats
+dashboard.afterPipeline
+dashboard.afterActivity
+dashboard.afterAccounts
+```
+
+---
+
+## How to create and install a module
+
+### 1. Create the module project
+
+Keep `spenta-module.json` in the package and create any authoring source under `src/`.
+
+### 2. Build browser-ready runtime entries
+
+Bundle the UI so every manifest `entry` points to a real HTML file inside the ZIP. Runtime JavaScript should be bundled; SpentaCRM does not compile an uploaded npm dependency graph.
+
+For example:
+
+```text
+dist/pages/inventory.html
+dist/widgets/stock-health.html
+dist/tabs/company-stock.html
+```
+
+Local CSS, JavaScript, images, and common media referenced by those HTML files can be packaged alongside them.
+
+### 3. Create the ZIP
+
+Package the manifest and runtime files. `spenta-module.json` is recommended as the manifest name; legacy `extension.json` is also recognized by the current installer.
+
+Current package limits are:
+
+- ZIP file: **16 MB maximum**;
+- total uncompressed content: **32 MB maximum**;
+- individual file: **8 MB maximum**;
+- manifest: **512 KB maximum**;
+- supported ZIP entry compression: **stored** or **deflate**;
+- unsafe paths such as `../` are rejected.
+
+### 4. Install it in SpentaCRM
+
+In the running CRM:
+
+```text
+Sidebar → Extensions → Install module ZIP
+```
+
+Choose the ZIP. SpentaCRM reads the manifest, validates the archive, stores the package, and adds the module to **Modules & Extensions**.
+
+### 5. Enable the module
+
+The installed module card shows its source, version, publisher, complexity tier, declared permissions, and contribution count. Enable it for the workspace.
+
+### 6. Use the new capability
+
+Depending on the manifest, the module can now appear as a sidebar page, dashboard widget, entity tab, or entity action without rebuilding the Next.js frontend.
+
+Four working package examples are included in [`module-examples/`](./module-examples/):
+
+```text
+simple-module-example.zip
+medium-module-example.zip
+advanced-module-example.zip
+professional-module-example.zip
+```
+
+For the complete package specification, see [`MODULES.md`](./MODULES.md).
+
+---
+
+## Module runtime security
+
+Portable ZIP modules are deliberately isolated.
+
+- Package files are persisted in **IndexedDB** under a module-specific key.
+- Runtime pages/widgets/tabs are loaded inside an **iframe sandbox**.
+- The iframe does not receive `allow-same-origin`.
+- Module code cannot directly read the parent DOM, CRM cookies, parent localStorage, or React state.
+- Local module CSS/JS/assets are loaded from the installed package and assembled into an isolated runtime document.
+- A Content Security Policy restricts the sandbox environment.
+- Removing a ZIP module removes its registry metadata and runtime package files.
+
+The host injects a small bridge:
+
+```js
+window.SpentaCRM.context
+window.SpentaCRM.post(type, payload)
+window.SpentaCRM.ready(payload)
+window.SpentaCRM.resize(height)
+window.SpentaCRM.navigate("/companies")
+```
+
+For entity tabs, the context can also include the current entity type and entity ID.
+
+> Portable runtime modules are appropriate for browser-side capabilities. Privileged backend logic should live in a trusted backend/service and be exposed through an authenticated API. A future NestJS/PostgreSQL Module Registry is expected to add package signatures, tenant installation state, dependency resolution, server-side descriptors, migrations, and richer auditing.
+
+---
+
+## Trusted code extensions
+
+When an extension must integrate directly with React/TypeScript internals, use the trusted extension workflow instead of an uploaded runtime ZIP.
+
+Trusted extensions use the local SDK:
+
+```ts
+import { defineExtension } from "@spentacrm/extension-sdk";
+```
+
+The repository resolves `@spentacrm/extension-sdk` to the local SDK source in `packages/extension-sdk`, so the core application does not depend on a separately published SDK package.
+
+Useful scripts:
+
+```bash
+pnpm extension:add -- <package>
+pnpm extension:remove -- <package>
+pnpm extensions:sync
+```
+
+Trusted contribution points include themes, modules, extension-owned pages, dashboard widgets, sidebar navigation, command-palette actions, and sandboxed remote modules.
+
+See [`EXTENSIONS.md`](./EXTENSIONS.md) and [`extension-examples/`](./extension-examples/).
 
 ---
 
 ## Theme Studio and white-label customization
 
-SpentaCRM is designed to be rebranded and adapted for different organizations.
-
-Workspace administrators can build custom visual themes without editing the core application code.
+SpentaCRM is designed to be adapted for different organizations without forking the entire UI.
 
 Current theme capabilities include:
 
 - light and dark appearance;
-- configurable product palette and accent colors;
+- configurable palette and accent colors;
 - radius and glass-surface controls;
 - typography presets and text scaling;
-- remote background images using HTTPS URLs;
+- HTTPS background images;
 - background opacity, blur, position, and sizing;
 - sidebar, topbar, and surface transparency;
-- visual effect presets such as `aurora`, `soft-glow`, `cyber-grid`, `scanlines`, `starfield`, `embers`, and `blood-mist`;
-- effect intensity and speed controls;
+- visual effects such as `aurora`, `soft-glow`, `cyber-grid`, `scanlines`, `starfield`, `embers`, and `blood-mist`;
+- effect intensity and speed;
 - grain and vignette controls;
 - live preview;
 - theme export as an installable extension package.
 
-Product identity can also be configured using environment variables without changing application source files.
+Product identity and workspace defaults can also be changed through environment variables.
 
 ---
 
 ## Architecture direction
 
-SpentaCRM currently focuses on completing the frontend product surface while keeping clear boundaries for a separate backend.
-
-The intended production architecture is:
-
 ```text
-┌─────────────────────────────────────┐
-│            SpentaCRM Web            │
-│      Next.js + React + TypeScript   │
-└──────────────────┬──────────────────┘
-                   │ Typed HTTP/API contracts
-                   ▼
-┌─────────────────────────────────────┐
-│          SpentaCRM Backend          │
-│       NestJS modular monolith       │
-└──────────────────┬──────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────┐
-│             PostgreSQL              │
-└─────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│              SpentaCRM Web              │
+│       Next.js + React + TypeScript      │
+│                                         │
+│  Core CRM ─── Extension Host ─── Modules│
+└───────────────────┬─────────────────────┘
+                    │ Typed HTTP/API contracts
+                    ▼
+┌─────────────────────────────────────────┐
+│            SpentaCRM Backend            │
+│          NestJS modular monolith        │
+└───────────────────┬─────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────┐
+│                PostgreSQL               │
+└─────────────────────────────────────────┘
 ```
 
 The frontend already defines integration boundaries for:
@@ -257,7 +469,7 @@ The frontend already defines integration boundaries for:
 /extensions
 ```
 
-See [API-CONTRACTS.md](./API-CONTRACTS.md) for backend DTOs, permission keys, and invariants.
+See [`API-CONTRACTS.md`](./API-CONTRACTS.md) for DTOs, permissions, and backend invariants.
 
 ---
 
@@ -265,13 +477,15 @@ See [API-CONTRACTS.md](./API-CONTRACTS.md) for backend DTOs, permission keys, an
 
 | Area | Technology |
 | --- | --- |
-| Framework | Next.js 16 |
-| UI | React 19 |
+| Framework | Next.js 16.3.3 |
+| UI | React 19.2.8 |
 | Language | TypeScript 5.8 |
 | Routing | Next.js App Router |
 | Rendering | Server Components + Client Components where needed |
 | Async UI | Suspense, streaming, loading/error boundaries |
-| Extension SDK | `@spentacrm/extension-sdk` |
+| Portable modules | Module Runtime API v3 + sandboxed iframe host |
+| Extension SDK | `@spentacrm/extension-sdk` → local repository SDK |
+| Package persistence | IndexedDB for runtime module packages |
 | Linting | ESLint 9 |
 | Runtime | Node.js 20.9+ |
 | Planned backend | NestJS |
@@ -283,12 +497,10 @@ See [API-CONTRACTS.md](./API-CONTRACTS.md) for backend DTOs, permission keys, an
 
 ### Prerequisites
 
-Make sure you have:
-
-- **Node.js 20.9 or newer**
+- **Node.js 20.9+**
 - **pnpm** recommended, or npm
 
-### 1. Clone the repository
+### 1. Clone
 
 ```bash
 git clone <YOUR_SPENTACRM_REPOSITORY_URL>
@@ -297,103 +509,95 @@ cd spentaCRM
 
 ### 2. Install dependencies
 
-Using pnpm:
-
 ```bash
 pnpm install
-```
-
-or npm:
-
-```bash
-npm install
-```
-
-### 3. Configure environment variables
-
-Copy the example environment file:
-
-```bash
-cp .env.example .env.local
-```
-
-On Windows PowerShell:
-
-```powershell
-Copy-Item .env.example .env.local
-```
-
-### 4. Start the development server
-
-```bash
-pnpm dev
 ```
 
 or:
 
 ```bash
-npm run dev
+npm install
 ```
 
-Open:
+If you are replacing an older SpentaCRM archive, clear stale dependencies/build cache once:
 
-```text
-http://localhost:3000
+```bash
+rm -rf node_modules .next
+pnpm install
 ```
 
-Unauthenticated sessions are redirected to `/login`.
+PowerShell:
 
----
+```powershell
+Remove-Item -Recurse -Force node_modules, .next -ErrorAction SilentlyContinue
+pnpm install
+```
 
-## Demo account
+### 3. Configure environment
+
+```bash
+cp .env.example .env.local
+```
+
+PowerShell:
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+### 4. Run
+
+```bash
+pnpm dev
+```
+
+Open `http://localhost:3000`.
+
+### Demo account
 
 ```text
 Email:    alex@example.com
 Password: demo1234
 ```
 
-Other seeded workspace-member emails can use the same demo password to preview different role permissions.
-
-> Demo authentication exists only to support the standalone frontend experience. Production authentication should be handled by the backend using secure credentialed session/cookie infrastructure.
+Demo authentication exists for the standalone frontend. Production authentication should be provided by the backend using secure session/cookie infrastructure.
 
 ---
 
 ## Authentication modes
 
-### Standalone frontend demo
+Standalone demo:
 
 ```env
 NEXT_PUBLIC_AUTH_ADAPTER=mock
 ```
 
-### Backend API mode
+Backend API mode:
 
 ```env
 NEXT_PUBLIC_AUTH_ADAPTER=api
 NEXT_PUBLIC_API_URL=https://api.example.com/api/v1
 ```
 
-Do not move production access or refresh tokens into `localStorage` simply to mirror the demo adapter.
+Production access/refresh credentials should not be copied into browser `localStorage` simply to mirror the mock adapter.
 
 ---
 
 ## White-label configuration
 
-The application identity and workspace defaults can be configured using `.env.local`.
-
 ```env
 NEXT_PUBLIC_APP_NAME=SpentaCRM
 NEXT_PUBLIC_APP_SHORT_NAME=Spenta
-NEXT_PUBLIC_APP_TAGLINE=Relationships, pipeline & delivery
-NEXT_PUBLIC_APP_VERSION=v0.13
+NEXT_PUBLIC_APP_TAGLINE=Modular B2B CRM platform
+NEXT_PUBLIC_APP_VERSION=v0.13.2
 NEXT_PUBLIC_WORKSPACE_NAME=Demo Workspace
 NEXT_PUBLIC_WORKSPACE_PLAN=Business
 NEXT_PUBLIC_LOCALE=en-GB
 NEXT_PUBLIC_DEFAULT_CURRENCY=EUR
-NEXT_PUBLIC_DEFAULT_TIMEZONE=Europe/Amsterdam
+NEXT_PUBLIC_DEFAULT_TIMEZONE=Europe/Berlin
 ```
 
-The central product configuration lives in:
+Central configuration:
 
 ```text
 src/config/product.ts
@@ -409,14 +613,14 @@ src/config/product.ts
 | `pnpm build` | Build the production frontend |
 | `pnpm start` | Start the production server |
 | `pnpm lint` | Run ESLint |
-| `pnpm lint:fix` | Run ESLint and automatically fix supported issues |
-| `pnpm typecheck` | Run TypeScript checks without emitting files |
-| `pnpm check` | Run typecheck, lint, and production build |
+| `pnpm lint:fix` | Run ESLint and fix supported issues |
+| `pnpm typecheck` | Run TypeScript checks |
+| `pnpm check` | Typecheck + lint + production build |
 | `pnpm extensions:sync` | Regenerate the trusted extension registry |
 | `pnpm extension:add -- <package>` | Register a trusted code extension |
-| `pnpm extension:remove -- <package>` | Remove a trusted code extension from the registry |
+| `pnpm extension:remove -- <package>` | Remove a trusted extension from the registry |
 
-The extension registry is synchronized automatically before development and production builds.
+The trusted extension registry is synchronized automatically before development and production builds.
 
 ---
 
@@ -424,31 +628,27 @@ The extension registry is synchronized automatically before development and prod
 
 ```text
 spentaCRM/
+├── public/
+│   └── assets/
+│       ├── brand/                 # SpentaCRM brand assets
+│       └── screenshots/           # README/product screenshots
 ├── src/
-│   ├── app/                 # App Router routes and route groups
-│   ├── auth/                # Authentication providers and adapters
-│   ├── components/          # CRM feature components
-│   │   ├── activities/
-│   │   ├── audit/
-│   │   ├── companies/
-│   │   ├── contacts/
-│   │   ├── dashboard/
-│   │   ├── deals/
-│   │   ├── extensions/
-│   │   ├── projects/
-│   │   ├── settings/
-│   │   └── tasks/
-│   ├── config/              # Product and workspace configuration
-│   ├── extensions/          # Built-in and generated extension registry
-│   └── lib/                 # Shared domain/API utilities
+│   ├── app/                       # App Router routes and route groups
+│   ├── auth/                      # Authentication providers/adapters
+│   ├── components/                # CRM feature components
+│   ├── config/                    # Product/workspace configuration
+│   ├── extensions/                # Registry, ZIP parser, runtime and persistence
+│   └── lib/                       # Shared domain/API utilities
 ├── packages/
-│   └── extension-sdk/       # SpentaCRM extension SDK
-├── extension-examples/      # Example themes, modules and widgets
-├── scripts/                 # Extension management scripts
+│   └── extension-sdk/             # Local SpentaCRM extension SDK
+├── module-examples/               # Simple → professional ZIP module examples
+├── extension-examples/            # Trusted/theme/remote examples
+├── scripts/                       # Extension registry management
 ├── API-CONTRACTS.md
 ├── DESIGN-NOTES.md
 ├── EXTENSIONS.md
 ├── FRONTEND-ROADMAP.md
+├── MODULES.md
 ├── OPTIMIZATION.md
 ├── PUBLIC-PRODUCT.md
 └── README.md
@@ -456,105 +656,54 @@ spentaCRM/
 
 ---
 
-## Development status
+## Development status and direction
 
-The current frontend roadmap has completed the major foundation through **Phase 08**.
+The current frontend contains the major B2B CRM foundation plus Module Runtime v3 and Theme Studio. Upcoming work is expected to focus on production hardening and backend integration, including:
 
-Completed areas include:
-
-- application foundation;
-- companies;
-- contacts;
-- deals and pipeline;
-- projects;
-- tasks and activities;
-- public / white-label productization;
-- Extension API v3 and Theme Studio;
-- operational dashboard;
-- authentication, workspace settings, RBAC, and audit log.
-
-The next frontend phase focuses on production polish, including:
-
-- consistent toast and error patterns;
-- confirmation dialogs for destructive operations;
-- deeper keyboard-navigation QA;
-- responsive QA;
-- API DTO mapping;
-- removal of direct mock-data dependencies from pages;
-- OpenAPI-generated/shared type integration.
-
-For the detailed implementation history and roadmap, see [FRONTEND-ROADMAP.md](./FRONTEND-ROADMAP.md).
-
----
-
-## Future direction
-
-SpentaCRM is intended to evolve beyond a single predefined B2B CRM interface.
-
-Areas planned or being explored for future releases include:
-
-- multiple CRM models for different business scenarios;
-- richer extension contribution points;
-- organization-specific modules and workflows;
+- consistent toast/error/confirmation patterns;
+- responsive and keyboard-navigation QA;
+- API DTO mapping and removal of direct mock-data dependencies;
+- NestJS/PostgreSQL backend implementation;
+- backend-driven tenant module registry;
+- package signatures and verification;
+- dependency/version compatibility for modules;
+- server-side module descriptors and migrations;
+- workflow automation and external integrations;
+- analytics and reporting;
+- notifications;
+- AI-assisted and agentic CRM workflows;
 - extension discovery and marketplace-style distribution;
-- workflow automation;
-- external integrations;
-- advanced analytics and reporting;
-- notification infrastructure;
-- stronger package permission and verification models;
-- backend-driven extension installation;
-- AI-assisted CRM workflows;
-- agentic CRM capabilities;
-- intelligent account, opportunity, and activity assistance;
-- additional deployment and self-hosting tooling.
+- self-hosting and deployment tooling.
 
-Ideas and architecture may evolve as the project develops.
+See [`FRONTEND-ROADMAP.md`](./FRONTEND-ROADMAP.md) for the detailed implementation history.
 
 ---
 
-## Security model
+## Security principles
 
-Frontend route protection and permission-aware UI improve the user experience, but the frontend must **never** be treated as the final security authority.
+Frontend permissions are not the final security authority. A production backend must validate authentication, tenant isolation, authorization, protected reads/writes, audit integrity, and extension permissions.
 
-A production backend must validate, at minimum:
-
-- authentication;
-- workspace / tenant isolation;
-- authorization and RBAC permissions;
-- protected reads and writes;
-- audit-event integrity;
-- extension permissions and trust level.
-
-The extension platform deliberately separates trust levels between data-only themes, sandboxed remote modules, and deployment-trusted code extensions.
-
-Do not execute arbitrary uploaded JavaScript using `eval`, inject unrestricted scripts into the CRM origin, or expose privileged CRM tokens to third-party extensions.
+SpentaCRM deliberately separates portable sandboxed modules from deployment-trusted code. Do not use `eval`, inject unrestricted uploaded scripts into the CRM origin, or expose privileged CRM credentials to third-party module code.
 
 ---
 
 ## Contributing
 
-SpentaCRM is being developed as an extensible CRM foundation, and contributions that improve the platform architecture, CRM workflows, accessibility, performance, extensions, documentation, integrations, and developer experience are welcome.
-
-A typical contribution flow is:
+A typical contribution flow:
 
 ```bash
-git checkout -b feature/my-feature
-# make your changes
+git switch -c feature/my-feature
+# make changes
 pnpm typecheck
 pnpm lint
 pnpm build
 git commit -m "feat: add my feature"
-git push origin feature/my-feature
+git push -u origin feature/my-feature
 ```
 
-Then open a Pull Request describing:
+Open a Pull Request explaining the change, why it is useful, screenshots/recordings for UI work, and any API/data-model/permission/module implications.
 
-1. what was changed;
-2. why the change is useful;
-3. screenshots or recordings for UI changes when applicable;
-4. any API, data-model, permission, or extension implications.
-
-Before larger architectural changes, opening an issue or discussion first is recommended so the implementation stays aligned with the direction of the project.
+For larger architectural changes, opening an issue or discussion first is recommended.
 
 ---
 
@@ -562,31 +711,27 @@ Before larger architectural changes, opening an issue or discussion first is rec
 
 | Document | Purpose |
 | --- | --- |
-| [FRONTEND-ROADMAP.md](./FRONTEND-ROADMAP.md) | Product implementation phases and current status |
-| [API-CONTRACTS.md](./API-CONTRACTS.md) | Planned NestJS API contracts, DTOs, permissions, and invariants |
-| [EXTENSIONS.md](./EXTENSIONS.md) | Extension API v3, installation models, themes, remote modules, and security |
-| [MODULES.md](./MODULES.md) | Portable ZIP module format, complexity levels, limits, and security model |
-| [OPTIMIZATION.md](./OPTIMIZATION.md) | Next.js performance and rendering architecture |
-| [PUBLIC-PRODUCT.md](./PUBLIC-PRODUCT.md) | B2B productization and white-label decisions |
-| [DESIGN-NOTES.md](./DESIGN-NOTES.md) | Product visual system and design direction |
+| [`MODULES.md`](./MODULES.md) | Portable project ZIP format, Runtime API v3, limits, bridge, and security |
+| [`EXTENSIONS.md`](./EXTENSIONS.md) | Trusted extensions, themes, remote modules, and extension model |
+| [`FRONTEND-ROADMAP.md`](./FRONTEND-ROADMAP.md) | Product implementation phases and status |
+| [`API-CONTRACTS.md`](./API-CONTRACTS.md) | Planned NestJS DTOs, permissions, and invariants |
+| [`OPTIMIZATION.md`](./OPTIMIZATION.md) | Next.js performance and rendering architecture |
+| [`PUBLIC-PRODUCT.md`](./PUBLIC-PRODUCT.md) | B2B productization and white-label decisions |
+| [`DESIGN-NOTES.md`](./DESIGN-NOTES.md) | Product visual system and design direction |
 
 ---
 
 ## License
 
-SpentaCRM is intended to be distributed as a free and open-source project. A repository license file should be added before the project is formally released or redistributed so that usage, modification, contribution, and distribution rights are legally explicit.
+SpentaCRM is intended to be released as a free and open-source project. A repository license should be selected and committed before formal redistribution so usage, modification, contribution, and distribution rights are legally explicit.
 
 ---
 
-## Project philosophy
+## Philosophy
 
-SpentaCRM is built around a straightforward idea:
+> **Do not rebuild the same CRM foundation for every organization.**
 
-> Do not rebuild the same CRM foundation for every organization.
-
-Build the common foundation once, keep it modular, make it customizable, and let each organization turn it into the CRM it actually needs.
-
-**SpentaCRM is still evolving — this is only the foundation.**
+Build the common foundation once. Keep the core stable. Move company-specific functionality into configuration and modules. Let every organization evolve SpentaCRM into the CRM it actually needs.
 
 ---
 
@@ -594,221 +739,409 @@ Build the common foundation once, keep it modular, make it customizable, and let
 
 ## SpentaCRM چیست؟
 
-**SpentaCRM** یک پلتفرم رایگان مدیریت ارتباط با مشتری برای کسب‌وکارهای **B2B** است که با هدف ساخت سریع CRMهای اختصاصی و قابل توسعه طراحی شده است.
+**SpentaCRM** یک پروژه رایگان CRM برای کسب‌وکارهای **B2B** است که به‌عنوان یک پایه قابل استفاده مجدد طراحی شده تا شرکت‌ها بتوانند CRM موردنیاز خود را سریع راه‌اندازی کنند و سپس فرآیندها، اصطلاحات، ظاهر، Integrationها، قوانین تجاری و قابلیت‌های اختصاصی خود را روی آن سوار کنند.
 
-ایده اصلی پروژه ساده است: بیشتر شرکت‌ها به اجزای پایه مشابهی در CRM نیاز دارند؛ مانند شرکت‌ها و مشتریان سازمانی، مخاطبان، فرصت‌های فروش، وظایف، فعالیت‌ها، سطح دسترسی، داشبورد، تاریخچه تغییرات و یکپارچه‌سازی‌ها. اما فرآیندها، اصطلاحات، ظاهر، ماژول‌ها و قوانین تجاری هر سازمان می‌تواند کاملاً متفاوت باشد.
+تقریباً همه سازمان‌ها به اجزای پایه مشابهی نیاز دارند: Companies/Accounts، Contacts، Opportunities، Tasks، Activities، Projects، Permissionها، Dashboard، Audit Log، Search و Integration. چیزی که بین شرکت‌ها تفاوت دارد نحوه اتصال و استفاده از این اجزاست. SpentaCRM بخش مشترک را در Core نگه می‌دارد و قابلیت‌های اختصاصی هر سازمان را تا حد امکان به Configuration، Theme، Integration و Moduleهای قابل نصب منتقل می‌کند.
 
-هدف SpentaCRM این است که این زیرساخت مشترک فقط یک‌بار ساخته شود تا توسعه‌دهندگان و سازمان‌ها بتوانند زمان خود را روی بخش‌هایی بگذارند که CRM آن‌ها را واقعاً اختصاصی می‌کند.
+هدف پروژه ساخت یک CRM ثابت برای همه نیست؛ هدف ساخت **پلتفرمی است که بتواند برای شرکت‌های مختلف به CRMهای متفاوت تبدیل شود**.
 
-به‌جای اینکه برای هر شرکت یک CRM از صفر ساخته شود، می‌توان SpentaCRM را به‌عنوان نقطه شروع استفاده کرد، تنظیمات Workspace را تغییر داد، فرآیندهای موردنیاز را شخصی‌سازی کرد، Extensionهای جدید نصب یا توسعه داد، ظاهر سیستم را تغییر داد، Backend اختصاصی را متصل کرد و در نهایت آن را به یک محصول اختصاصی برای سازمان تبدیل کرد.
+> به‌جای ساخت دوباره همان زیرساخت CRM برای هر مشتری، از SpentaCRM شروع کنید و فقط چیزی را توسعه دهید که آن پروژه را واقعاً اختصاصی می‌کند.
 
-> SpentaCRM قرار نیست همه شرکت‌ها را مجبور به استفاده از یک مدل ثابت CRM کند. هدف بلندمدت پروژه پشتیبانی از مدل‌های مختلف CRM و Workflowهای قابل توسعه برای سناریوهای متفاوت B2B است.
-
-این پروژه در حال توسعه فعال است و در نسخه‌های بعدی مدل‌های CRM جدید، ماژول‌ها، Integrationها، Automation، قابلیت‌های مبتنی بر هوش مصنوعی، گزینه‌های شخصی‌سازی و ابزارهای توسعه بیشتری به آن اضافه خواهند شد.
+پروژه در حال توسعه فعال است و در ادامه مدل‌های بیشتر CRM، Automation، Integration، Analytics، قابلیت‌های هوش مصنوعی، Agentic CRM، ابزارهای توسعه Module و روش‌های Deployment گسترده‌تر به آن اضافه خواهند شد.
 
 ---
 
-## چرا SpentaCRM؟
-
-ساخت CRM اختصاصی معمولاً باعث می‌شود بخش زیادی از زمان توسعه صرف ساخت دوباره زیرساخت‌هایی شود که ارتباط مستقیمی با منطق اختصاصی کسب‌وکار ندارند.
-
-SpentaCRM تلاش می‌کند این کار تکراری را کاهش دهد و یک پایه آماده برای موارد زیر فراهم کند:
-
-- راه‌اندازی سریع CRMهای B2B؛
-- استفاده به‌عنوان پایه یک CRM داخلی یا پروژه اختصاصی مشتری؛
-- White-label و تغییر هویت محصول برای هر سازمان؛
-- معماری ماژولار به‌جای یک Workflow ثابت و یکپارچه؛
-- سیستم Extension برای توسعه قابلیت‌ها؛
-- Theme و ظاهر کاملاً قابل شخصی‌سازی؛
-- مرزهای مشخص برای اتصال Frontend به Backend مستقل؛
-- امکان رشد از یک CRM سبک به یک پلتفرم تجاری بزرگ‌تر.
-
-این پروژه می‌تواند برای شرکت‌های نرم‌افزاری و SaaS، خدمات حرفه‌ای، مشاوره، لجستیک، صنایع، خدمات مالی، انرژی، فناوری سلامت و سایر کسب‌وکارهای account-led مناسب باشد.
-
----
-
-## امکانات فعلی
-
-نسخه فعلی Frontend بخش‌های اصلی موردنیاز برای عملیات یک CRM B2B را پوشش می‌دهد.
+## امکانات اصلی فعلی
 
 ### مدیریت ارتباط با مشتری
 
 - Companies / Accounts
 - Contacts و Stakeholderها
-- مدیریت مخاطب اصلی هر شرکت
-- نمایش Activityهای مرتبط با هر Account
-- جستجو، فیلتر، مرتب‌سازی و ساختار آماده Pagination
-- Archive و Reactivate کردن رکوردها
+- Primary Contact
+- Activity Context در سطح Account
+- Search، Filter، Sort و ساختار آماده Pagination
+- Archive و Reactivate
 
 ### فروش و Pipeline
 
 - Deals / Opportunities
-- نمای Pipeline و List
+- Pipeline View و List View
 - Workflow مبتنی بر Stage
-- محاسبه Weighted Pipeline و Forecast
-- مبلغ Deal، Probability و Expected Close Date
-- وضعیت Won / Lost / Reopen
-- اجباری بودن Loss Reason برای Dealهای از دست‌رفته
-- ارتباط Deal با Company، Contact و Owner
+- Weighted Pipeline و Forecast
+- Deal Value، Probability، Expected Close Date، Owner، Company و Contact
+- Won / Lost / Reopen
+- Loss Reason اجباری برای Deal از دست‌رفته
 
 ### Delivery و Projects
 
-- پروژه‌های مرتبط با مشتری
-- تبدیل Won Deal به Project
-- Delivery Owner و اعضای تیم
-- وضعیت، Health، تاریخ‌ها و Progress پروژه
-- Milestoneها
-- ارتباط Project با Account و Source Deal
+- Projectهای مرتبط با مشتری
+- Won Deal → Project handoff
+- Delivery Owner و Team
+- Health، Progress، Date و Milestone
+- ارتباط با Company و Source Deal
 - Archive و Reactivate
 
-مدیریت پروژه در SpentaCRM عمداً سبک نگه داشته شده است. هدف آن حفظ Context مربوط به تحویل خدمات به مشتری در CRM است، نه جایگزین شدن با ابزارهایی مثل Jira یا Linear.
+Project Management در SpentaCRM عمداً سبک نگه داشته شده است؛ هدف حفظ Context تجاری و Delivery داخل CRM است، نه جایگزینی Jira یا Linear.
 
 ### Tasks و Activities
 
 - Work Queue مشترک
 - Priority و Due State
-- Start، Pause، Complete، Reopen، Archive و Reactivate وظایف
+- Start، Pause، Complete، Reopen، Archive و Reactivate
 - اتصال Task به Company، Contact، Deal یا Project
-- Timeline فعالیت‌ها
-- ثبت تماس، Note، جلسه، Email و سایر تعاملات
-- ساخت Task و Activity مستقیماً از Context رکوردهای مختلف
+- Activity Timeline
+- Call، Note، Meeting، Email و سایر Interactionها
+- ساخت Task/Activity از Context رکوردها
 
 ### داشبورد عملیاتی
 
-- KPI مشتریان فعال
+- Active Customer KPI
 - Open Pipeline
 - Weighted Forecast
-- وضعیت Delivery
+- Delivery Health
 - Due Work
 - Pipeline Breakdown
-- صف کارهای دارای اولویت
+- Priority Work Queue
 - Account Attention Radar
 - Customer Activity Intelligence
-- Scope مبتنی بر Account، Team Member و بازه زمانی
+- فیلتر Account، Team Member و Period
 
-### احراز هویت و مدیریت Workspace
+### Authentication، RBAC و Administration
 
 - Sign-in
-- Mock و API Authentication Adapter
+- Mock/API Authentication Adapter
 - Route Protection
 - Workspace Settings
-- User Profile Settings
-- مدیریت اعضا
-- Invite، Suspend و Reactivate اعضا
+- User Profile
+- Member Management
+- Invite، Suspend و Reactivate
 - Roleهای سیستمی و سفارشی
-- RBAC Permission Manifest
-- نمایش منوها و صفحات براساس سطح دسترسی
+- Permission-aware navigation/pages
 
-### Audit Log
+### Audit و Productivity
 
-- رابط Read-only برای Audit Log
-- جستجو و فیلتر
-- فیلتر بر اساس Actor، Action و Entity
-- مشاهده جزئیات Event
-- نمایش تغییرات Before / After
-- قراردادهای آماده برای Backend
-
-### قابلیت‌های عمومی
-
-- جستجوی سراسری با `Cmd/Ctrl + K`
+- Audit Log رابط Read-only
+- Filter بر اساس Actor، Action و Entity
+- نمایش Before/After
+- جستجوی سراسری `Cmd/Ctrl + K`
 - Deep Link به رکوردهای CRM
-- Responsive Application Shell
-- Loading، Error، Recovery و Empty State
-- Accessibility baseline
-- استفاده از Server Components به‌صورت پیش‌فرض
-- Suspense و Streaming
-- Parallel Routes در بخش Dashboard
+- Responsive Shell
+- Loading/Error/Recovery/Empty State
+- Suspense، Streaming و Parallel Routes در Dashboard
 
 ---
 
-## ماژول‌های ZIP قابل نصب
+## معماری ماژولار
 
-SpentaCRM می‌تواند قابلیت‌های اختیاری هر شرکت را به‌صورت فایل ZIP دریافت و در بخش **Modules & Extensions** ثبت کند. هر پکیج دارای فایل `spenta-module.json` است و یکی از چهار سطح **simple**، **medium**، **advanced** یا **professional** را مشخص می‌کند. ماژول نصب‌شده را می‌توان برای هر Workspace فعال یا غیرفعال کرد.
+یکی از اهداف اصلی SpentaCRM این است که برای افزودن قابلیت اختصاصی هر شرکت مجبور نباشیم Core پروژه را به مجموعه‌ای از Forkها و Branchهای مشتری‌محور تبدیل کنیم.
 
-فایل ZIP یک پروژه کوچک ماژول است: `spenta-module.json` فقط Manifest آن است و فایل‌های آماده مرورگر در `dist/` صفحه، Widget یا Tab واقعی را پیاده‌سازی می‌کنند. فایل‌های پکیج در IndexedDB ذخیره و داخل iframe sandbox اجرا می‌شوند؛ بنابراین ماژول Portable بدون Build مجدد Next.js نصب می‌شود و کد آپلودشده نیز در Origin اصلی CRM اجرا نمی‌شود. Extensionهای React/TypeScript دارای دسترسی مستقیم به Core همچنان به‌صورت Trusted و در زمان Build ثبت می‌شوند. جزئیات در [`MODULES.md`](./MODULES.md) آمده است.
+در حال حاضر دو مدل اصلی توسعه وجود دارد:
+
+| مدل | مناسب برای | زمان نصب | نحوه اجرا |
+| --- | --- | --- | --- |
+| **Portable Module ZIP** | Page، Widget، Tab، Action و Mini-app اختصاصی شرکت | Runtime | iframe Sandbox |
+| **Trusted Code Extension** | React/TypeScript عمیق با دسترسی مستقیم به Core | Build/Deployment | کد Trusted داخل برنامه |
+
+این تفکیک باعث می‌شود نصب Runtime ساده باشد ولی کد آپلودشده مستقیماً داخل Origin اصلی CRM اجرا نشود.
 
 ---
 
-## سیستم Extension
+## ماژول پروژه‌ای ZIP — Module Runtime v3
 
-یکی از اهداف اصلی SpentaCRM این است که برای هر قابلیت جدید مجبور به تغییر Core پروژه نباشیم.
+ماژول در SpentaCRM فقط JSON نیست. **خود ماژول یک پروژه کوچک ZIP شده است** و JSON تنها Manifest یا شناسنامه آن است.
 
-در حال حاضر **Extension API v3** چند مدل توسعه را پشتیبانی می‌کند.
+```text
+inventory-module.zip
+├── spenta-module.json          # شناسنامه، Permissionها و Contributionها
+├── src/                        # سورس اختیاری برای توسعه/نگهداری
+│   ├── inventory.ts
+│   └── inventory.css
+├── dist/                       # خروجی آماده اجرا در Browser
+│   ├── pages/
+│   │   └── inventory.html
+│   ├── widgets/
+│   │   └── stock-health.html
+│   ├── tabs/
+│   │   └── company-stock.html
+│   ├── shared.css
+│   └── runtime.js
+└── README.md
+```
 
-### Portable Runtime Extensions
+پوشه `src/` می‌تواند TypeScript، React، Build Script یا فایل‌های توسعه را نگه دارد؛ اما SpentaCRM بعد از Upload قرار نیست TypeScript دلخواه را Compile کند. توسعه‌دهنده قبل از ساخت ZIP خروجی Browser-ready را در `dist/` تولید می‌کند.
 
-Extensionهای JSON می‌توانند بدون Build مجدد، Theme یا Remote Module به CRM اضافه کنند.
+### یک Module ZIP الان چه چیزهایی می‌تواند اضافه کند؟
 
-این مدل برای Extensionهایی طراحی شده که باید در Runtime نصب شوند، بدون اینکه JavaScript آپلودشده دسترسی unrestricted به Origin اصلی CRM داشته باشد.
+- **صفحه جدید** داخل Host پایدار SpentaCRM؛
+- **آیتم جدید Sidebar** برای Page ماژول؛
+- **Dashboard Widget**؛
+- **Tab جدید** روی Company، Contact، Deal و Project؛
+- **Entity Action** برای بازکردن Page ماژول یا URL؛
+- UI و Workflow ایزوله مخصوص شرکت؛
+- ارتباط HTTPS با APIها در محدوده CSP Runtime.
 
-### Trusted Code Extensions
+بنابراین قابلیت‌هایی مثل Inventory، Customer Success، Meeting Management، Expense Tracking، Account Scoring، Internal Portal یا ابزارهای خاص یک صنعت می‌توانند بدون تغییر Route Tree اصلی Next.js به CRM اضافه شوند.
 
-Extensionهای React / TypeScript می‌توانند قابلیت‌های پیشرفته‌تری ایجاد کنند و به‌عنوان Package قابل اعتماد هنگام Deployment نصب می‌شوند.
+### سطح ماژول‌ها
 
-Contribution Pointهای فعلی شامل موارد زیر هستند:
+- **simple** — یک قابلیت کوچک و متمرکز با UI و Permission محدود؛
+- **medium** — Workflow گسترده‌تر، چند Surface یا Integration؛
+- **advanced** — چند Page/Extension Point و فرآیند تجاری پیچیده‌تر؛
+- **professional** — ساختار Enterprise، چند Surface، Integrationهای Audit شده و معمولاً Backend مستقل یا Companion Service.
 
-- Theme؛
-- Module؛
-- Page اختصاصی Extension؛
-- Dashboard Widget؛
-- Sidebar Navigation؛
-- Command Palette Action؛
-- Remote Moduleهای Sandbox شده.
+این Level فقط توصیف Complexity است؛ Permissionها همچنان تعیین می‌کنند ماژول چه چیزهایی درخواست می‌کند.
 
-برای جزئیات بیشتر [EXTENSIONS.md](./EXTENSIONS.md) و [extension-examples](./extension-examples/) را ببینید.
+---
+
+## نمونه Manifest v3
+
+```json
+{
+  "apiVersion": 3,
+  "manifest": {
+    "id": "vendor.inventory",
+    "name": "Inventory Management",
+    "version": "1.0.0",
+    "publisher": "Vendor",
+    "description": "Inventory and stock management for B2B accounts.",
+    "complexity": "advanced",
+    "categories": ["module"],
+    "permissions": [
+      "runtime:sandbox",
+      "ui:navigation",
+      "ui:dashboard",
+      "ui:entity-tabs",
+      "ui:entity-actions"
+    ]
+  },
+  "contributes": {
+    "runtimePages": [
+      {
+        "id": "inventory",
+        "title": "Inventory",
+        "entry": "dist/pages/inventory.html",
+        "navigation": {
+          "label": "Inventory",
+          "section": "extensions"
+        }
+      }
+    ],
+    "runtimeDashboardWidgets": [
+      {
+        "id": "stock-health",
+        "title": "Stock health",
+        "zone": "dashboard.afterStats",
+        "entry": "dist/widgets/stock-health.html",
+        "height": 240
+      }
+    ],
+    "runtimeEntityTabs": [
+      {
+        "id": "company-stock",
+        "entity": "company",
+        "label": "Inventory",
+        "entry": "dist/tabs/company-stock.html",
+        "height": 420
+      }
+    ],
+    "runtimeEntityActions": [
+      {
+        "id": "open-inventory",
+        "entity": "company",
+        "label": "Open Inventory",
+        "tone": "primary",
+        "action": {
+          "type": "open-page",
+          "pageId": "inventory"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Contribution Pointهای Runtime
+
+| Contribution | کاربرد |
+| --- | --- |
+| `runtimePages` | ایجاد یک Page کامل برای Module از طریق Host Route پایدار SpentaCRM |
+| `runtimeDashboardWidgets` | افزودن Widget Sandbox شده به Dashboard |
+| `runtimeEntityTabs` | افزودن Tab به Company، Contact، Deal یا Project |
+| `runtimeEntityActions` | افزودن Action؛ فعلاً `open-page` و `open-url` |
+
+Zoneهای فعلی Dashboard:
+
+```text
+dashboard.afterStats
+dashboard.afterPipeline
+dashboard.afterActivity
+dashboard.afterAccounts
+```
+
+---
+
+## نحوه ساخت و نصب Module
+
+### ۱. پروژه Module را بسازید
+
+فایل `spenta-module.json` را داخل پکیج قرار دهید و در صورت نیاز Source را در `src/` نگه دارید.
+
+### ۲. خروجی Browser-ready تولید کنید
+
+هر `entry` داخل Manifest باید به یک فایل HTML واقعی داخل ZIP اشاره کند. JavaScript ماژول باید قبل از Packaging Bundle شود؛ SpentaCRM dependency graph مربوط به npm را بعد از Upload Build نمی‌کند.
+
+مثلاً:
+
+```text
+dist/pages/inventory.html
+dist/widgets/stock-health.html
+dist/tabs/company-stock.html
+```
+
+CSS، JavaScript، Image و Mediaهای Local موردنیاز HTML نیز می‌توانند داخل همان ZIP باشند.
+
+### ۳. فایل ZIP بسازید
+
+نام پیشنهادی Manifest برابر `spenta-module.json` است. Installer فعلی برای سازگاری `extension.json` را نیز می‌شناسد.
+
+محدودیت‌های فعلی پکیج:
+
+- حداکثر حجم ZIP: **16 MB**؛
+- مجموع حجم Uncompressed: **32 MB**؛
+- حداکثر هر File: **8 MB**؛
+- حداکثر Manifest: **512 KB**؛
+- Compression قابل قبول: **stored** یا **deflate**؛
+- Pathهای ناامن مثل `../` رد می‌شوند.
+
+### ۴. داخل SpentaCRM نصب کنید
+
+از Sidebar وارد بخش زیر شوید:
+
+```text
+Extensions → Install module ZIP
+```
+
+ZIP را انتخاب کنید. SpentaCRM Archive و Manifest را بررسی می‌کند، فایل‌های Runtime را ذخیره می‌کند و Module را به لیست **Modules & Extensions** اضافه می‌کند.
+
+### ۵. Module را Enable کنید
+
+Card ماژول Source، Version، Publisher، Complexity، Permissionهای Declare شده و تعداد Contributionها را نشان می‌دهد. آن را برای Workspace فعال کنید.
+
+### ۶. قابلیت جدید را استفاده کنید
+
+بر اساس Manifest، قابلیت می‌تواند فوراً به Sidebar، Dashboard، Entity Tab یا Entity Action اضافه شود؛ بدون Build مجدد Frontend Next.js.
+
+چهار نمونه کامل داخل [`module-examples/`](./module-examples/) وجود دارد:
+
+```text
+simple-module-example.zip
+medium-module-example.zip
+advanced-module-example.zip
+professional-module-example.zip
+```
+
+Specification کامل در [`MODULES.md`](./MODULES.md) قرار دارد.
+
+---
+
+## امنیت Module Runtime
+
+Moduleهای Portable عمداً از Core ایزوله هستند:
+
+- فایل‌های پکیج در **IndexedDB** با کلید مخصوص Module ذخیره می‌شوند؛
+- Page/Widget/Tab داخل **iframe sandbox** اجرا می‌شود؛
+- iframe دارای `allow-same-origin` نیست؛
+- ماژول دسترسی مستقیم به Parent DOM، Cookieهای CRM، localStorage والد یا React State ندارد؛
+- CSS/JS/Assetهای Local از همان ZIP خوانده شده و داخل Runtime Document ایزوله قرار می‌گیرند؛
+- Content Security Policy محیط اجرا را محدود می‌کند؛
+- Uninstall کردن Module هم Registry Metadata و هم فایل‌های Runtime را حذف می‌کند.
+
+Bridge محدودی از سمت Host در اختیار ماژول قرار می‌گیرد:
+
+```js
+window.SpentaCRM.context
+window.SpentaCRM.post(type, payload)
+window.SpentaCRM.ready(payload)
+window.SpentaCRM.resize(height)
+window.SpentaCRM.navigate("/companies")
+```
+
+در Entity Tab، Context می‌تواند Entity Type و Entity ID فعلی را هم داشته باشد.
+
+> Module ZIP فعلی برای قابلیت‌های Browser-side طراحی شده است. منطق Backend دارای دسترسی بالا باید در Backend/Service قابل اعتماد اجرا شود و از طریق API امن در اختیار Module قرار گیرد. در معماری آینده NestJS/PostgreSQL، Module Registry می‌تواند Signature، Tenant Installation State، Dependency Resolution، Server Descriptor، Migration و Audit کامل‌تر را مدیریت کند.
+
+---
+
+## Trusted Code Extension
+
+وقتی Extension نیاز دارد مستقیماً با React/TypeScript و Core داخلی کار کند، به‌جای Runtime ZIP از مدل Trusted استفاده می‌شود.
+
+```ts
+import { defineExtension } from "@spentacrm/extension-sdk";
+```
+
+Repository مسیر `@spentacrm/extension-sdk` را مستقیماً به SDK محلی موجود در `packages/extension-sdk` Resolve می‌کند؛ بنابراین Core برای اجرا وابسته به یک SDK منتشرشده یا Link شده در `node_modules` نیست.
+
+Commandهای مرتبط:
+
+```bash
+pnpm extension:add -- <package>
+pnpm extension:remove -- <package>
+pnpm extensions:sync
+```
+
+Trusted Extension می‌تواند Theme، Module، Page، Dashboard Widget، Sidebar Navigation، Command Palette Action و Remote Module ارائه کند.
+
+جزئیات بیشتر: [`EXTENSIONS.md`](./EXTENSIONS.md) و [`extension-examples/`](./extension-examples/).
 
 ---
 
 ## Theme Studio و White-label
 
-SpentaCRM از ابتدا به‌گونه‌ای طراحی شده که بتوان آن را برای سازمان‌های مختلف Rebrand و Customize کرد.
+SpentaCRM از ابتدا برای Rebrand و Customize شدن طراحی شده است.
 
-مدیر Workspace می‌تواند بدون تغییر کد اصلی Theme اختصاصی بسازد.
+قابلیت‌های فعلی Theme Studio:
 
-قابلیت‌های فعلی Theme Studio شامل موارد زیر است:
-
-- Light و Dark mode؛
-- تغییر Palette و Accent Color؛
-- تنظیم Radius و Glass Surface؛
-- Typography Preset و Text Scale؛
-- تصویر پس‌زمینه از طریق HTTPS URL؛
-- تنظیم Opacity، Blur، Position و Size پس‌زمینه؛
-- Transparency برای Sidebar، Topbar و Surfaceها؛
-- Effectهایی مانند `aurora`، `soft-glow`، `cyber-grid`، `scanlines`، `starfield`، `embers` و `blood-mist`؛
-- تنظیم شدت و سرعت Effect؛
+- Light/Dark؛
+- Palette و Accent؛
+- Radius و Glass Surface؛
+- Typography و Text Scale؛
+- Background Image از HTTPS URL؛
+- Opacity، Blur، Position و Size؛
+- Transparency برای Sidebar، Topbar و Surface؛
+- Effectهای `aurora`، `soft-glow`، `cyber-grid`، `scanlines`، `starfield`، `embers` و `blood-mist`؛
+- Effect Intensity/Speed؛
 - Grain و Vignette؛
 - Live Preview؛
-- خروجی گرفتن Theme به‌صورت Extension قابل نصب.
+- Export Theme به‌صورت Extension قابل نصب.
 
-هویت اصلی محصول نیز از طریق Environment Variable قابل تغییر است و برای تغییر نام یا اطلاعات Workspace نیازی به تغییر مستقیم Source Code نیست.
+نام محصول و تنظیمات Workspace نیز از Environment Variable قابل تغییر است.
 
 ---
 
 ## معماری هدف
 
-در وضعیت فعلی تمرکز پروژه روی تکمیل Frontend است، اما Boundaryهای موردنیاز برای Backend مستقل از قبل تعریف شده‌اند.
-
-معماری هدف برای نسخه Production به شکل زیر است:
-
 ```text
-┌─────────────────────────────────────┐
-│            SpentaCRM Web            │
-│      Next.js + React + TypeScript   │
-└──────────────────┬──────────────────┘
-                   │ Typed HTTP/API contracts
-                   ▼
-┌─────────────────────────────────────┐
-│          SpentaCRM Backend          │
-│       NestJS modular monolith       │
-└──────────────────┬──────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────┐
-│             PostgreSQL              │
-└─────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│              SpentaCRM Web              │
+│       Next.js + React + TypeScript      │
+│                                         │
+│  Core CRM ─── Extension Host ─── Modules│
+└───────────────────┬─────────────────────┘
+                    │ Typed HTTP/API contracts
+                    ▼
+┌─────────────────────────────────────────┐
+│            SpentaCRM Backend            │
+│          NestJS modular monolith        │
+└───────────────────┬─────────────────────┘
+                    │
+                    ▼
+┌─────────────────────────────────────────┐
+│                PostgreSQL               │
+└─────────────────────────────────────────┘
 ```
 
-Frontend در حال حاضر Boundaryهای لازم را برای Endpointهای زیر در نظر گرفته است:
+Boundaryهای فعلی Frontend:
 
 ```text
 /auth
@@ -827,7 +1160,7 @@ Frontend در حال حاضر Boundaryهای لازم را برای Endpointها
 /extensions
 ```
 
-برای DTOها، Permission Keyها و Invariantهای Backend فایل [API-CONTRACTS.md](./API-CONTRACTS.md) را ببینید.
+برای DTO، Permission و Invariantهای Backend فایل [`API-CONTRACTS.md`](./API-CONTRACTS.md) را ببینید.
 
 ---
 
@@ -835,35 +1168,37 @@ Frontend در حال حاضر Boundaryهای لازم را برای Endpointها
 
 | بخش | تکنولوژی |
 | --- | --- |
-| Framework | Next.js 16 |
-| UI | React 19 |
+| Framework | Next.js 16.3.3 |
+| UI | React 19.2.8 |
 | Language | TypeScript 5.8 |
-| Routing | Next.js App Router |
-| Rendering | Server Components + Client Components |
+| Routing | App Router |
+| Rendering | Server Components + Client Components در صورت نیاز |
 | Async UI | Suspense، Streaming، Loading/Error Boundaries |
-| Extension SDK | `@spentacrm/extension-sdk` |
-| Linting | ESLint 9 |
-| Runtime | Node.js 20.9+ |
+| Portable Module | Module Runtime API v3 + iframe Sandbox |
+| Extension SDK | `@spentacrm/extension-sdk` → SDK محلی Repository |
+| Runtime Package Storage | IndexedDB |
+| Lint | ESLint 9 |
+| Node | 20.9+ |
 | Backend هدف | NestJS |
 | Database هدف | PostgreSQL |
 
 ---
 
-## راه‌اندازی پروژه
+## راه‌اندازی
 
-### پیش‌نیازها
+### پیش‌نیاز
 
-- **Node.js 20.9 یا جدیدتر**
+- **Node.js 20.9+**
 - ترجیحاً **pnpm** یا npm
 
-### ۱. Clone کردن Repository
+### ۱. Clone
 
 ```bash
 git clone <YOUR_SPENTACRM_REPOSITORY_URL>
 cd spentaCRM
 ```
 
-### ۲. نصب Dependencyها
+### ۲. نصب Dependency
 
 ```bash
 pnpm install
@@ -875,81 +1210,77 @@ pnpm install
 npm install
 ```
 
-### ۳. تنظیم Environment Variableها
+اگر نسخه قدیمی پروژه را جایگزین کرده‌اید، یک بار Cache قبلی را حذف کنید:
+
+```bash
+rm -rf node_modules .next
+pnpm install
+```
+
+PowerShell:
+
+```powershell
+Remove-Item -Recurse -Force node_modules, .next -ErrorAction SilentlyContinue
+pnpm install
+```
+
+### ۳. Environment
 
 ```bash
 cp .env.example .env.local
 ```
 
-در PowerShell ویندوز:
+PowerShell:
 
 ```powershell
 Copy-Item .env.example .env.local
 ```
 
-### ۴. اجرای Development Server
+### ۴. اجرا
 
 ```bash
 pnpm dev
 ```
 
-یا:
+سپس `http://localhost:3000` را باز کنید.
 
-```bash
-npm run dev
-```
-
-سپس آدرس زیر را باز کنید:
-
-```text
-http://localhost:3000
-```
-
-کاربرانی که Login نشده‌اند به `/login` منتقل می‌شوند.
-
----
-
-## حساب Demo
+### حساب Demo
 
 ```text
 Email:    alex@example.com
 Password: demo1234
 ```
 
-برای مشاهده Permissionهای Roleهای مختلف می‌توان از Email سایر اعضای Seed شده Workspace با همان Password استفاده کرد.
-
-> Authentication فعلی برای Demo مستقل Frontend است. در Production باید Authentication توسط Backend و Session/Cookie امن انجام شود.
+Authentication فعلی Demo برای اجرای مستقل Frontend است. در Production باید Backend از Session/Cookie امن استفاده کند.
 
 ---
 
-## حالت‌های Authentication
+## حالت Authentication
 
-### Demo مستقل Frontend
+Demo:
 
 ```env
 NEXT_PUBLIC_AUTH_ADAPTER=mock
 ```
 
-### اتصال به Backend
+Backend API:
 
 ```env
 NEXT_PUBLIC_AUTH_ADAPTER=api
 NEXT_PUBLIC_API_URL=https://api.example.com/api/v1
 ```
 
-در نسخه Production نباید Access Token یا Refresh Token فقط برای شبیه شدن به Demo Adapter داخل `localStorage` قرار داده شود.
+در Production نباید صرفاً برای شبیه شدن به Mock Adapter، Access/Refresh Credential را داخل `localStorage` قرار داد.
 
 ---
 
-## تنظیم White-label
-
-نام برنامه و تنظیمات پیش‌فرض Workspace از طریق `.env.local` قابل تغییر است:
+## White-label Configuration
 
 ```env
 NEXT_PUBLIC_APP_NAME=SpentaCRM
 NEXT_PUBLIC_APP_SHORT_NAME=Spenta
-NEXT_PUBLIC_APP_TAGLINE=Relationships, pipeline & delivery
-NEXT_PUBLIC_APP_VERSION=v0.13
+NEXT_PUBLIC_APP_TAGLINE=Modular B2B CRM platform
+NEXT_PUBLIC_APP_VERSION=v0.13.2
 NEXT_PUBLIC_WORKSPACE_NAME=Demo Workspace
 NEXT_PUBLIC_WORKSPACE_PLAN=Business
 NEXT_PUBLIC_LOCALE=fa-IR
@@ -957,7 +1288,7 @@ NEXT_PUBLIC_DEFAULT_CURRENCY=IRR
 NEXT_PUBLIC_DEFAULT_TIMEZONE=Asia/Tehran
 ```
 
-تنظیمات مرکزی محصول در مسیر زیر قرار دارد:
+تنظیمات مرکزی:
 
 ```text
 src/config/product.ts
@@ -965,54 +1296,50 @@ src/config/product.ts
 
 ---
 
-## Scriptهای پروژه
+## Scriptها
 
 | Command | کاربرد |
 | --- | --- |
-| `pnpm dev` | اجرای Development Server |
+| `pnpm dev` | Development Server |
 | `pnpm build` | Production Build |
-| `pnpm start` | اجرای Production Server |
-| `pnpm lint` | اجرای ESLint |
-| `pnpm lint:fix` | اجرای ESLint و اصلاح خودکار موارد قابل اصلاح |
-| `pnpm typecheck` | بررسی TypeScript بدون ساخت فایل خروجی |
-| `pnpm check` | اجرای Typecheck، Lint و Build |
-| `pnpm extensions:sync` | ساخت مجدد Registry مربوط به Extensionهای Trusted |
-| `pnpm extension:add -- <package>` | ثبت یک Trusted Code Extension |
-| `pnpm extension:remove -- <package>` | حذف Extension از Registry |
+| `pnpm start` | Production Server |
+| `pnpm lint` | ESLint |
+| `pnpm lint:fix` | ESLint + Auto fix |
+| `pnpm typecheck` | TypeScript Check |
+| `pnpm check` | Typecheck + Lint + Build |
+| `pnpm extensions:sync` | بازسازی Trusted Extension Registry |
+| `pnpm extension:add -- <package>` | ثبت Trusted Extension |
+| `pnpm extension:remove -- <package>` | حذف Trusted Extension |
 
-Registry مربوط به Extensionها قبل از `dev` و `build` به‌صورت خودکار Sync می‌شود.
+Registry قبل از `dev` و `build` به‌صورت خودکار Sync می‌شود.
 
 ---
 
-## ساختار پروژه
+## ساختار Repository
 
 ```text
 spentaCRM/
+├── public/
+│   └── assets/
+│       ├── brand/                 # لوگو و Brand Assetها
+│       └── screenshots/           # اسکرین‌شات‌های README/Product
 ├── src/
-│   ├── app/                 # Routeها و Route Groupهای App Router
-│   ├── auth/                # Provider و Adapterهای Authentication
-│   ├── components/          # Componentهای قابلیت‌های CRM
-│   │   ├── activities/
-│   │   ├── audit/
-│   │   ├── companies/
-│   │   ├── contacts/
-│   │   ├── dashboard/
-│   │   ├── deals/
-│   │   ├── extensions/
-│   │   ├── projects/
-│   │   ├── settings/
-│   │   └── tasks/
-│   ├── config/              # تنظیمات Product و Workspace
-│   ├── extensions/          # Extensionهای Built-in و Registry
-│   └── lib/                 # Domain و API Utilityهای مشترک
+│   ├── app/                       # App Router
+│   ├── auth/                      # Authentication
+│   ├── components/                # Feature Components
+│   ├── config/                    # Product/Workspace config
+│   ├── extensions/                # Registry، ZIP parser، Runtime، Storage
+│   └── lib/                       # Domain/API utilities
 ├── packages/
-│   └── extension-sdk/       # SDK مربوط به Extensionهای SpentaCRM
-├── extension-examples/      # نمونه Theme، Module و Widget
-├── scripts/                 # Scriptهای مدیریت Extension
+│   └── extension-sdk/             # SpentaCRM SDK محلی
+├── module-examples/               # نمونه ZIP از Simple تا Professional
+├── extension-examples/            # Trusted/Theme/Remote examples
+├── scripts/
 ├── API-CONTRACTS.md
 ├── DESIGN-NOTES.md
 ├── EXTENSIONS.md
 ├── FRONTEND-ROADMAP.md
+├── MODULES.md
 ├── OPTIMIZATION.md
 ├── PUBLIC-PRODUCT.md
 └── README.md
@@ -1020,134 +1347,87 @@ spentaCRM/
 
 ---
 
-## وضعیت توسعه
+## مسیر توسعه بعدی
 
-Roadmap فعلی Frontend تا بخش‌های اصلی **Phase 08** تکمیل شده است.
+نسخه فعلی پایه اصلی CRM B2B، Theme Studio و Module Runtime v3 را دارد. مسیر توسعه آینده شامل موارد زیر است:
 
-بخش‌های تکمیل‌شده شامل موارد زیر هستند:
-
-- Foundation؛
-- Companies؛
-- Contacts؛
-- Deals و Pipeline؛
-- Projects؛
-- Tasks و Activities؛
-- Public / White-label Productization؛
-- Extension API v3 و Theme Studio؛
-- Operational Dashboard؛
-- Authentication، Workspace Settings، RBAC و Audit Log.
-
-فاز بعدی Frontend روی Production Polish تمرکز دارد، از جمله:
-
-- Toast و Error Pattern یکپارچه؛
-- Confirm Dialog برای عملیات مخرب؛
-- تکمیل Keyboard Navigation؛
-- Responsive QA؛
-- API DTO Mapping Layer؛
-- حذف Import مستقیم Mock Data از Pageها؛
-- نقطه اتصال برای Typeهای تولیدشده از OpenAPI.
-
-جزئیات کامل در [FRONTEND-ROADMAP.md](./FRONTEND-ROADMAP.md) قرار دارد.
-
----
-
-## مسیر آینده پروژه
-
-هدف SpentaCRM این است که در آینده از یک رابط ثابت CRM فراتر برود و بتوان از یک Core مشترک، CRMهای مختلف ساخت.
-
-مواردی که برای نسخه‌های آینده در نظر گرفته شده یا قابل بررسی هستند:
-
-- مدل‌های مختلف CRM برای سناریوهای تجاری متفاوت؛
-- Contribution Pointهای بیشتر برای Extensionها؛
-- Module و Workflowهای اختصاصی سازمان‌ها؛
-- Extension Discovery و Marketplace؛
-- Workflow Automation؛
-- Integration با سرویس‌های خارجی؛
-- Analytics و Reporting پیشرفته؛
+- Toast/Error/Confirmation یکپارچه؛
+- Responsive و Keyboard Navigation QA؛
+- اتصال کامل DTOها به API و حذف وابستگی مستقیم Pageها به Mock Data؛
+- Backend با NestJS/PostgreSQL؛
+- Module Registry در سطح Tenant/Workspace؛
+- Signature و Verification پکیج؛
+- Dependency و Version Compatibility؛
+- Server-side Module Descriptor و Migration؛
+- Workflow Automation و Integrationهای خارجی؛
+- Analytics و Reporting؛
 - Notification Infrastructure؛
-- Permission و Verification قوی‌تر برای Packageها؛
-- نصب Extension از طریق Backend؛
-- قابلیت‌های CRM مبتنی بر هوش مصنوعی؛
-- Agentic CRM؛
-- دستیارهای هوشمند برای Account، Opportunity و Activity؛
-- ابزارهای بیشتر برای Deployment و Self-hosting.
+- AI-assisted و Agentic CRM Workflow؛
+- Module Discovery و Marketplace-style distribution؛
+- Self-hosting و Deployment Tooling.
 
-معماری و اولویت این قابلیت‌ها ممکن است همزمان با رشد پروژه تغییر کند.
+جزئیات در [`FRONTEND-ROADMAP.md`](./FRONTEND-ROADMAP.md).
 
 ---
 
-## مدل امنیتی
+## اصول امنیتی
 
-Route Protection و Permission-aware UI در Frontend برای UX و جلوگیری از دسترسی تصادفی مفید هستند، اما **Frontend نباید مرجع نهایی امنیت باشد**.
+Permissionهای Frontend مرجع نهایی امنیت نیستند. Backend Production باید Authentication، Tenant Isolation، Authorization، Read/Writeهای Protected، Audit Integrity و Permissionهای Extension را دوباره Validate کند.
 
-Backend نسخه Production باید حداقل موارد زیر را روی تمام عملیات محافظت‌شده بررسی کند:
-
-- Authentication؛
-- جداسازی Workspace / Tenant؛
-- Authorization و RBAC؛
-- Read و Writeهای محافظت‌شده؛
-- صحت Audit Eventها؛
-- Permission و Trust Level مربوط به Extensionها.
-
-سیستم Extension نیز بین Themeهای Data-only، Remote Moduleهای Sandbox شده و Code Extensionهای Trusted تفاوت قائل می‌شود.
-
-JavaScript آپلودشده نباید با `eval` اجرا شود، Script دلخواه نباید به Origin اصلی CRM Inject شود و Tokenهای دارای سطح دسترسی بالا نباید بدون محدودیت در اختیار Extensionهای ثالث قرار بگیرند.
+SpentaCRM عمداً Runtime Moduleهای Sandbox شده را از Trusted Code جدا کرده است. از `eval`، اجرای Script آپلودشده در Origin اصلی CRM یا قراردادن Credential حساس در اختیار Third-party Module خودداری کنید.
 
 ---
 
-## مشارکت در توسعه
-
-SpentaCRM به‌عنوان یک CRM Foundation قابل توسعه ساخته می‌شود. Contributionهایی که معماری پلتفرم، Workflowهای CRM، Accessibility، Performance، Extensionها، Documentation، Integrationها و Developer Experience را بهبود دهند می‌توانند به رشد پروژه کمک کنند.
+## مشارکت در پروژه
 
 Workflow پیشنهادی:
 
 ```bash
-git checkout -b feature/my-feature
+git switch -c feature/my-feature
 # changes
 pnpm typecheck
 pnpm lint
 pnpm build
 git commit -m "feat: add my feature"
-git push origin feature/my-feature
+git push -u origin feature/my-feature
 ```
 
-سپس یک Pull Request ایجاد کنید و در آن مشخص کنید:
+در Pull Request توضیح دهید چه چیزی تغییر کرده، چرا مفید است، برای تغییرات UI Screenshot/Recording اضافه کنید و اثر آن روی API، Data Model، Permission یا Module Platform را مشخص کنید.
 
-1. چه چیزی تغییر کرده است؛
-2. چرا این تغییر مفید است؛
-3. در صورت تغییر UI، Screenshot یا Recording اضافه کنید؛
-4. تأثیر تغییر روی API، Data Model، Permission یا Extensionها را توضیح دهید.
-
-برای تغییرات بزرگ معماری بهتر است ابتدا Issue یا Discussion ایجاد شود.
+برای تغییرات معماری بزرگ بهتر است ابتدا Issue یا Discussion ایجاد شود.
 
 ---
 
 ## مستندات
 
-| فایل | توضیح |
+| فایل | کاربرد |
 | --- | --- |
-| [FRONTEND-ROADMAP.md](./FRONTEND-ROADMAP.md) | فازهای توسعه و وضعیت فعلی Frontend |
-| [API-CONTRACTS.md](./API-CONTRACTS.md) | قراردادهای Backend، DTOها، Permissionها و Invariantها |
-| [EXTENSIONS.md](./EXTENSIONS.md) | Extension API v3، مدل نصب، Theme، Remote Module و Security |
-| [MODULES.md](./MODULES.md) | فرمت ماژول ZIP، سطح‌بندی، محدودیت‌ها و مدل امنیتی |
-| [OPTIMIZATION.md](./OPTIMIZATION.md) | معماری Performance و Rendering در Next.js |
-| [PUBLIC-PRODUCT.md](./PUBLIC-PRODUCT.md) | تصمیمات مربوط به B2B Productization و White-label |
-| [DESIGN-NOTES.md](./DESIGN-NOTES.md) | Design System و جهت بصری محصول |
+| [`MODULES.md`](./MODULES.md) | فرمت ZIP پروژه‌ای، Runtime API v3، Limitها، Bridge و Security |
+| [`EXTENSIONS.md`](./EXTENSIONS.md) | Trusted Extension، Theme، Remote Module و مدل توسعه |
+| [`FRONTEND-ROADMAP.md`](./FRONTEND-ROADMAP.md) | Phaseها و وضعیت توسعه |
+| [`API-CONTRACTS.md`](./API-CONTRACTS.md) | DTO، Permission و Invariantهای Backend NestJS |
+| [`OPTIMIZATION.md`](./OPTIMIZATION.md) | معماری Rendering/Performance در Next.js |
+| [`PUBLIC-PRODUCT.md`](./PUBLIC-PRODUCT.md) | White-label و Productization |
+| [`DESIGN-NOTES.md`](./DESIGN-NOTES.md) | Design System و جهت بصری محصول |
 
 ---
 
 ## License
 
-هدف این است که SpentaCRM به‌صورت رایگان و Open Source منتشر شود. پیش از انتشار رسمی یا دریافت Contribution عمومی، باید یک فایل License مناسب به Repository اضافه شود تا حقوق استفاده، تغییر، انتشار و مشارکت به‌صورت حقوقی مشخص باشند.
+هدف SpentaCRM انتشار به‌صورت پروژه رایگان و Open Source است. قبل از انتشار/توزیع رسمی باید فایل License مناسب به Repository اضافه شود تا حقوق استفاده، تغییر، مشارکت و توزیع از نظر حقوقی دقیق مشخص باشند.
 
 ---
 
 ## فلسفه پروژه
 
-ایده اصلی SpentaCRM را می‌توان در یک جمله خلاصه کرد:
+> **برای هر سازمان همان زیرساخت CRM را از صفر دوباره نساز.**
 
-> برای هر سازمان، زیرساخت یکسان CRM را دوباره از صفر نساز.
+Core مشترک را یک‌بار بساز، آن را پایدار و ماژولار نگه دار، قابلیت‌های اختصاصی شرکت‌ها را به Configuration و Module منتقل کن و اجازه بده هر سازمان SpentaCRM را به CRM مخصوص خودش تبدیل کند.
 
-یک Core مشترک بساز، آن را ماژولار و قابل توسعه نگه دار و اجازه بده هر سازمان آن را به CRM موردنیاز خودش تبدیل کند.
+---
 
-**SpentaCRM هنوز در حال رشد است — این فقط پایه کار است.**
+<div align="center">
+
+**SpentaCRM — modular CRM infrastructure, not a one-size-fits-all CRM.**
+
+</div>
