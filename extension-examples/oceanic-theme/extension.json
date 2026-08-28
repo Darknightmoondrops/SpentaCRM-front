@@ -1,0 +1,76 @@
+{
+  "apiVersion": 2,
+  "manifest": {
+    "id": "example.oceanic-theme",
+    "name": "Oceanic Theme",
+    "version": "2.0.0",
+    "publisher": "Example Studio",
+    "description": "Example portable theme extension that can be installed from the Extensions screen.",
+    "categories": [
+      "theme"
+    ],
+    "permissions": [
+      "ui:theme"
+    ],
+    "license": "MIT"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "id": "example.oceanic",
+        "label": "Oceanic",
+        "description": "Cool blue surfaces for B2B teams.",
+        "appearance": "light",
+        "tokens": {
+          "--ink": "#102b3a",
+          "--ink-soft": "#244454",
+          "--paper": "#f2f8fa",
+          "--surface": "#ffffff",
+          "--surface-2": "#e8f2f5",
+          "--surface-raised": "#ffffff",
+          "--line": "#d7e6eb",
+          "--line-strong": "#b7d0d8",
+          "--muted": "#627984",
+          "--accent": "#087f8c",
+          "--accent-soft": "#d9f0f2",
+          "--success": "#168556",
+          "--warning": "#a96b00",
+          "--danger": "#bd3f4b",
+          "--focus": "#087f8c",
+          "--app-sidebar-bg": "#0e2a36",
+          "--app-sidebar-border": "#1c3b48",
+          "--app-sidebar-active": "#17495a",
+          "--app-sidebar-hover": "#133b49",
+          "--app-sidebar-text": "#c0d7de",
+          "--app-sidebar-muted": "#7fa0aa",
+          "--app-topbar-bg": "rgba(255,255,255,.94)"
+        },
+        "visuals": {
+          "background": {
+            "opacity": 0,
+            "blurPx": 0,
+            "position": "center center",
+            "size": "cover",
+            "repeat": "no-repeat",
+            "overlay": "transparent",
+            "blendMode": "normal"
+          },
+          "surfaces": {
+            "opacity": 0.96,
+            "blurPx": 10,
+            "saturation": 1.0,
+            "sidebarOpacity": 0.96,
+            "topbarOpacity": 0.94
+          },
+          "motion": {
+            "preset": "soft-glow",
+            "intensity": 0.25,
+            "speed": 0.75,
+            "grain": 0.0,
+            "vignette": 0.0
+          }
+        }
+      }
+    ]
+  }
+}

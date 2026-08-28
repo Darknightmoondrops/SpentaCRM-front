@@ -1,0 +1,10 @@
+{
+  "name": "@example/b2b-crm-account-health",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": "./index.tsx",
+  "peerDependencies": {
+    "@b2b-crm/extension-sdk": ">=0.1.0",
+    "react": ">=19"
+  }
+}
