@@ -1,0 +1,25 @@
+{
+  "apiVersion": 2,
+  "manifest": {
+    "id": "example.customer-portal",
+    "name": "Customer Portal",
+    "version": "1.0.0",
+    "publisher": "Example Studio",
+    "description": "Example portable remote module. Replace the URL with an HTTPS app that allows iframe embedding.",
+    "categories": ["module", "integration"],
+    "permissions": ["remote:frame", "ui:navigation"],
+    "license": "MIT"
+  },
+  "contributes": {
+    "remoteModules": [
+      {
+        "id": "portal",
+        "title": "Customer Portal",
+        "description": "A remote application hosted outside the CRM origin.",
+        "url": "https://example.com",
+        "navigation": { "label": "Customer Portal", "section": "extensions" },
+        "height": "viewport"
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "apiVersion": 2,
+  "manifest": {
+    "id": "example.crimson-wallpaper",
+    "name": "Crimson Wallpaper",
+    "version": "1.0.0",
+    "publisher": "Example Studio",
+    "description": "Example custom visual theme with a URL-only background image and atmospheric motion.",
+    "categories": ["theme"],
+    "permissions": ["ui:theme"],
+    "license": "MIT"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "id": "example.crimson-wallpaper.variant",
+        "label": "Crimson Wallpaper",
+        "description": "Replace the imageUrl with any HTTPS image URL.",
+        "appearance": "dark",
+        "tokens": {
+          "--paper": "#100607",
+          "--surface": "#1a0b0d",
+          "--surface-2": "#241013",
+          "--surface-raised": "#1f0d10",
+          "--ink": "#fff1f2",
+          "--ink-soft": "#e9c8cc",
+          "--muted": "#b58c92",
+          "--line": "#4a2026",
+          "--line-strong": "#74303a",
+          "--accent": "#e11d48",
+          "--accent-soft": "#48101f",
+          "--focus": "#fb7185",
+          "--radius": "14px",
+          "--app-sidebar-bg": "#0b0304",
+          "--app-sidebar-border": "#351116",
+          "--app-sidebar-active": "#351019",
+          "--app-sidebar-hover": "#220a0e",
+          "--app-sidebar-text": "#e7c4c9",
+          "--app-sidebar-muted": "#91636b",
+          "--app-topbar-bg": "rgba(16,6,7,.72)"
+        },
+        "visuals": {
+          "background": {
+            "imageUrl": "https://images.example.com/replace-with-your-image.jpg",
+            "opacity": 0.35,
+            "blurPx": 2,
+            "position": "center center",
+            "size": "cover",
+            "repeat": "no-repeat",
+            "overlay": "rgba(25,0,4,.30)",
+            "blendMode": "normal"
+          },
+          "surfaces": { "opacity": 0.82, "blurPx": 18, "saturation": 1.08, "sidebarOpacity": 0.9, "topbarOpacity": 0.78 },
+          "motion": { "preset": "blood-mist", "intensity": 0.72, "speed": 0.72, "grain": 0.18, "vignette": 0.45 }
+        }
+      }
+    ]
+  }
+}
